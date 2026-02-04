@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location - Smart Digital Canteen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+
+
+     body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.3;
+    color: var(--black);
+    background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* Add overlay to make content more readable */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    z-index: -1;
+}
+        :root {
+            --customer-primary: #ff6b35;
+            --customer-secondary: #f7931e;
+            --black: #2d2d2d;
+            --gray: #666;
+            --gray-dark: #555;
+            --danger: #dc3545;
+            --radius-md: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Navigation Bar Styles */
+        .navbar-brand {
+            color: #ffffff !important;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+            width: auto;
+        }
+
+        /* Navigation Bar - Black Background & White Text Override */
+        .navbar {
+            background-color: #000000 !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            color: #ffffff !important;
+        }
+
+        .navbar-toggle {
+            color: #ffffff !important;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--customer-primary) !important;
+        }
+
+        /* Mobile Navigation Override */
+        @media (max-width: 768px) {
+            .navbar-toggle {
+                display: block;
+            }
+            
+            .navbar-nav {
+                display: none;
+                background-color: #000000 !important;
+            }
+            
+            .navbar-nav .nav-link {
+                color: #ffffff !important;
+                border-bottom: 1px solid #333 !important;
+            }
+        }
+        
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .cart-badge {
+            position: relative;
+        }
+        
+        .cart-count {
+            background: var(--customer-primary);
+            color: white;
+            border-radius: 50%;
+            padding: 0.125rem 0.5rem;
+            font-size: 0.75rem;
+            margin-left: 0.25rem;
+        }
+        
+        .page-section {
+            padding: 5rem 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+        
+        .mt-md {
+            margin-top: 1rem;
+        }
+        
+        .mt-lg {
+            margin-top: 1rem;
+        }
+        
+        .mt-sm {
+            margin-top: 0.5rem;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-customer-primary {
+            background: var(--customer-primary);
+            color: white;
+        }
+        
+        .btn-customer-primary:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-lg {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .map-container {
+            min-height: 400px;
+        }
+        
+        .map-placeholder {
+            background: #f5f5f5;
+            border: 2px dashed #ddd;
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            text-align: center;
+        }
+        
+        .map-placeholder .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .empty-state-title {
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+        
+        .empty-state-text {
+            color: var(--gray);
+        }
+        
+        footer {
+            background: var(--black);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        /* Responsive Grid for Location Section */
+        @media (max-width: 768px) {
+            .page-section .container > div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        Location Page
+        Shows canteen location with Google Maps integration
+    -->
+    
+    <!-- Navigation Bar - With Black Background & White Text -->
+    <nav class="navbar navbar-customer" style="background-color: #000000;">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <img src="logo1.jpg" alt="SUSL Forklet Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span style="display:none;">🍽️ SUSL Canteen</span>
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation" style="color: #ffffff;">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link" style="color: #ffffff;">Home</a></li>
+                <li><a href="menu.html" class="nav-link" style="color: #ffffff;">Menu</a></li>
+                <li><a href="cart.html" class="nav-link cart-badge" style="color: #ffffff;">
+                    🛒 Cart <span class="cart-count">0</span>
+                </a></li>
+                <li><a href="order-history.html" class="nav-link" style="color: #ffffff;">My Orders</a></li>
+                <li id="userNav">
+                    <a href="login.html" class="nav-link" style="color: #ffffff;">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <br>
+<div class="container">
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <h2 style="font-size: 2.5rem; font-weight: 800; color: #2d2d2d;">Find Us</h2>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1rem;">
+            <div style="width: 60px; height: 3px; background-color: #cd5f08;"></div>
+            <p style="color: #cd5f08; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin: 0;">Locate our canteen on the map</p>
+            <div style="width: 60px; height: 3px; background-color: #cd5f08;"></div>
+        </div>
+    </div>
+</div>
+    
+    <!-- Location Section -->
+    <section class="page-section">
+        <div class="container" style="max-width: 1200px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch;">
+                <!-- Left Side - Location Details -->
+                <div class="card" id="locationDetails" style="height: 100%;">
+                    <!-- Location details will be loaded here -->
+                </div>
+                
+                <!-- Right Side - Map Container -->
+                <div class="card" style="height: 100%;">
+                    <h3>📍 Location Map</h3>
+                    <div id="mapContainer" class="map-container mt-md">
+                        <!-- Map or placeholder will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Directions Button -->
+            <div class="text-center mt-lg">
+                <a href="#" id="directionsBtn" class="btn btn-customer-primary btn-lg" target="_blank">
+                    🗺️ Get Directions in Google Maps
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer style="background: var(--black); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">🍽️ SUSL Smart Digital Canteen System</p>
+            <p style="color: var(--gray); font-size: 0.875rem;">© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data for demonstration
+        const SAMPLE_LOCATION = {
+            name: "SUSL Main Canteen",
+            address: "Sabaragamuwa University of Sri Lanka, Belihuloya",
+            phone: "+94 45 227 6001",
+            openHours: "7:00 AM - 6:00 PM",
+            lat: 6.7145,
+            lng: 80.7363
+        };
+        
+        // Storage keys (for demo)
+        const STORAGE_KEYS = {
+            SHOP_LOCATION: 'shop_location'
+        };
+        
+        const USER_ROLES = {
+            CUSTOMER: 'customer'
+        };
+        
+        // Mock functions for demo
+        function getFromStorage(key) {
+            return SAMPLE_LOCATION;
+        }
+        
+        function getCurrentUser() {
+            return null; // Not logged in for demo
+        }
+        
+        function updateCartBadge() {
+            // Demo function
+        }
+        
+        function setupLogoutButton() {
+            // Demo function
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update navigation
+            updateNavigation();
+            
+            // Load location details
+            loadLocationDetails();
+            
+            // Update cart badge
+            updateCartBadge();
+        });
+        
+        /**
+         * Update navigation based on user login status
+         */
+        function updateNavigation() {
+            const currentUser = getCurrentUser();
+            const userNav = document.getElementById('userNav');
+            
+            if (currentUser && currentUser.role === USER_ROLES.CUSTOMER) {
+                userNav.innerHTML = `
+                    <div class="flex gap-sm" style="align-items: center;">
+                        <span class="nav-link">👤 <span class="user-name">${currentUser.name}</span></span>
+                        <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                    </div>
+                `;
+                setupLogoutButton();
+            }
+        }
+        
+        /**
+         * Load and display location details
+         */
+        function loadLocationDetails() {
+            const location = getFromStorage(STORAGE_KEYS.SHOP_LOCATION);
+            const detailsContainer = document.getElementById('locationDetails');
+            const mapContainer = document.getElementById('mapContainer');
+            const directionsBtn = document.getElementById('directionsBtn');
+            
+            if (!location) {
+                detailsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📍</div>
+                        <h3 class="empty-state-title">Location not set</h3>
+                        <p class="empty-state-text">Canteen location is not configured yet</p>
+                    </div>
+                `;
+                mapContainer.innerHTML = `
+                    <div class="map-placeholder">
+                        <span class="icon">🗺️</span>
+                        <p>Map not available</p>
+                    </div>
+                `;
+                directionsBtn.style.display = 'none';
+                return;
+            }
+            
+            // Display location details
+            detailsContainer.innerHTML = `
+                <h3 style="margin-bottom: 1.5rem;">🏪 ${location.name}</h3>
+                <div class="mt-md" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div>
+                        <p style="color: var(--gray-dark); font-size: 0.875rem; margin-bottom: 0.5rem;">Address</p>
+                        <p style="font-weight: 600; font-size: 1rem; color: var(--black);">${location.address}</p>
+                    </div>
+                    ${location.phone ? `
+                        <div>
+                            <p style="color: var(--gray-dark); font-size: 0.875rem; margin-bottom: 0.5rem;">Phone</p>
+                            <p style="font-weight: 600; font-size: 1rem; color: var(--black);">📞 ${location.phone}</p>
+                        </div>
+                    ` : ''}
+                    ${location.openHours ? `
+                        <div>
+                            <p style="color: var(--gray-dark); font-size: 0.875rem; margin-bottom: 0.5rem;">Opening Hours</p>
+                            <p style="font-weight: 600; font-size: 1rem; color: var(--black);">🕐 ${location.openHours}</p>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            // Display map (using iframe embed for Google Maps)
+            if (location.lat && location.lng) {
+                mapContainer.innerHTML = `
+                    <iframe 
+                        width="100%" 
+                        height="400" 
+                        frameborder="0" 
+                        style="border:0; border-radius: var(--radius-md);" 
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${location.lat},${location.lng}&zoom=16" 
+                        allowfullscreen>
+                    </iframe>
+                    <p class="mt-sm text-center" style="color: var(--gray-dark); font-size: 0.875rem;">
+                        Can't see the map? 
+                        <a href="https://www.google.com/maps?q=${location.lat},${location.lng}" 
+                           target="_blank" style="color: var(--customer-primary);">
+                            Open in Google Maps
+                        </a>
+                    </p>
+                `;
+                
+                // Update directions button
+                directionsBtn.href = `https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}`;
+            } else {
+                mapContainer.innerHTML = `
+                    <div class="map-placeholder">
+                        <span class="icon">🗺️</span>
+                        <p>Map coordinates not available</p>
+                        <p style="font-size: 0.875rem; color: var(--gray-dark);">
+                            ${location.address}
+                        </p>
+                    </div>
+                `;
+                directionsBtn.href = `https://www.google.com/maps/search/${encodeURIComponent(location.address)}`;
+            }
+        }
+    </script>
+</body>
+</html>

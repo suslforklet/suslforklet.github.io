@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+     <!-- Add Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+    .navbar-brand {
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand img {
+    height: 50px;
+    width: auto;
+}
+
+
+/* Navigation Bar - Black Background & White Text Override */
+.navbar {
+    background-color: #000000 !important;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+}
+
+.navbar-toggle {
+    color: #ffffff !important;
+}
+
+.nav-link {
+    color: #ffffff !important;
+}
+
+/* Mobile Navigation Override */
+@media (max-width: 768px) {
+    .navbar-nav {
+        background-color: #000000 !important;
+    }
+    
+    .navbar-nav .nav-link {
+        color: #ffffff !important;
+        border-bottom: 1px solid #333 !important;
+    }
+}
+
+/* Body with background image */
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.4;
+    color: #2d2d2d;
+    background-image: url('https://images.unsplash.com/photo-504674900247-0877df9cc836?w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Add overlay to make content more readable */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: -1;
+}
+
+/* Reduce spacing to fit content on one page */
+.page-section {
+    padding: 1rem 0;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+    margin-bottom: 0.75rem;
+    color: #2d2d2d;
+}
+
+.mt-md {
+    margin-top: 0.75rem;
+}
+
+.mt-lg {
+    margin-top: 1rem;
+}
+
+.mt-sm {
+    margin-top: 0.5rem;
+}
+
+footer {
+    background: #2d2d2d;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Responsive Grid for Location Section */
+@media (max-width: 768px) {
+    .page-section .container > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+    }
+}
+</style>
+
+
+
+
+</head>
+<body>
+    <!-- 
+        Location Page
+        Shows canteen location with Google Maps integration
+    -->
+    
+    <!-- Navigation Bar - With Black Background & White Text -->
+    <nav class="navbar navbar-customer" style="background-color: #000000;">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <img src="logo1.jpg" alt="SUSL Forklet Logo">
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation" style="color: #ffffff;">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link active" style="color: #ffffff;">Home</a></li>
+                <li><a href="menu.html" class="nav-link" style="color: #ffffff;">Menu</a></li>
+                <li><a href="cart.html" class="nav-link cart-badge" style="color: #ffffff;">
+                    🛒 Cart <span class="cart-count">0</span>
+                </a></li>
+                <li><a href="order-history.html" class="nav-link" style="color: #ffffff;">My Orders</a></li>
+                <li id="userNav">
+                    <a href="login.html" class="nav-link" style="color: #ffffff;">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <br>
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 1rem;">
+            <h2 style="font-size: 2rem; font-weight: 800; color: #2d2d2d;">Find Us</h2>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 0.5rem;">
+                <div style="width: 60px; height: 3px; background-color: #cd5f08;"></div>
+                <p style="color: #cd5f08; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin: 0;">Locate our canteen on the map</p>
+                <div style="width: 60px; height: 3px; background-color: #cd5f08;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Location Section -->
+    <section class="page-section">
+        <div class="container" style="max-width: 1200px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch;">
+                <!-- Left Side - Location Details -->
+                <div class="card" id="locationDetails" style="height: 100%;">
+                    <!-- Location details will be loaded here -->
+                </div>
+                
+                <!-- Right Side - Map Container -->
+                <div class="card" style="height: 100%;">
+                    <h3>📍 Location Map</h3>
+                    <div id="mapContainer" class="map-container mt-md">
+                        <!-- Map or placeholder will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Directions Button -->
+            <div class="text-center mt-lg">
+                <a href="#" id="directionsBtn" class="btn btn-customer-primary btn-lg" target="_blank">
+                    🗺️ Get Directions in Google Maps
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer style="background: #2d2d2d; color: white; padding: 1rem 0; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">🍽️ SUSL Smart Digital Canteen System</p>
+            <p style="color: #999; font-size: 0.875rem;">© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/cart.js"></script>
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update navigation
+            updateNavigation();
+            
+            // Load location details
+            loadLocationDetails();
+            
+            // Update cart badge
+            updateCartBadge();
+        });
+        
+        /**
+         * Update navigation based on user login status
+         */
+        function updateNavigation() {
+            const currentUser = getCurrentUser();
+            const userNav = document.getElementById('userNav');
+            
+            if (currentUser && currentUser.role === USER_ROLES.CUSTOMER) {
+                userNav.innerHTML = `
+                    <div class="flex gap-sm" style="align-items: center;">
+                        <span class="nav-link">👤 <span class="user-name">${currentUser.name}</span></span>
+                        <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                    </div>
+                `;
+                setupLogoutButton();
+            }
+        }
+        
+        /**
+         * Load and display location details
+         */
+        function loadLocationDetails() {
+            const location = getFromStorage(STORAGE_KEYS.SHOP_LOCATION);
+            const detailsContainer = document.getElementById('locationDetails');
+            const mapContainer = document.getElementById('mapContainer');
+            const directionsBtn = document.getElementById('directionsBtn');
+            
+            if (!location) {
+                detailsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📍</div>
+                        <h3 class="empty-state-title">Location not set</h3>
+                        <p class="empty-state-text">Canteen location is not configured yet</p>
+                    </div>
+                `;
+                mapContainer.innerHTML = `
+                    <div class="map-placeholder">
+                        <span class="icon">🗺️</span>
+                        <p>Map not available</p>
+                    </div>
+                `;
+                directionsBtn.style.display = 'none';
+                return;
+            }
+            
+            // Display location details
+            detailsContainer.innerHTML = `
+                <h3 style="margin-bottom: 1rem;">🏪 ${location.name}</h3>
+                <div class="mt-md" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div>
+                        <p style="color: #555; font-size: 0.875rem; margin-bottom: 0.5rem;">Address</p>
+                        <p style="font-weight: 600; font-size: 1rem; color: #2d2d2d;">${location.address}</p>
+                    </div>
+                    ${location.phone ? `
+                        <div>
+                            <p style="color: #555; font-size: 0.875rem; margin-bottom: 0.5rem;">Phone</p>
+                            <p style="font-weight: 600; font-size: 1rem; color: #2d2d2d;">📞 ${location.phone}</p>
+                        </div>
+                    ` : ''}
+                    ${location.openHours ? `
+                        <div>
+                            <p style="color: #555; font-size: 0.875rem; margin-bottom: 0.5rem;">Opening Hours</p>
+                            <p style="font-weight: 600; font-size: 1rem; color: #2d2d2d;">🕐 ${location.openHours}</p>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            // Display map (using iframe embed for Google Maps)
+            if (location.lat && location.lng) {
+                mapContainer.innerHTML = `
+                    <iframe 
+                        width="100%" 
+                        height="350" 
+                        frameborder="0" 
+                        style="border:0; border-radius: 8px;" 
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${location.lat},${location.lng}&zoom=16" 
+                        allowfullscreen>
+                    </iframe>
+                    <p class="mt-sm text-center" style="color: #555; font-size: 0.875rem;">
+                        Can't see the map? 
+                        <a href="https://www.google.com/maps?q=${location.lat},${location.lng}" 
+                           target="_blank" style="color: #ff6b35;">
+                            Open in Google Maps
+                        </a>
+                    </p>
+                `;
+                
+                // Update directions button
+                directionsBtn.href = `https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}`;
+            } else {
+                mapContainer.innerHTML = `
+                    <div class="map-placeholder">
+                        <span class="icon">🗺️</span>
+                        <p>Map coordinates not available</p>
+                        <p style="font-size: 0.875rem; color: #555;">
+                            ${location.address}
+                        </p>
+                    </div>
+                `;
+                directionsBtn.href = `https://www.google.com/maps/search/${encodeURIComponent(location.address)}`;
+            }
+        }
+    </script>
+</body>
+</html>

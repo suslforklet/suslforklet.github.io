@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 
+        Staff Order Management Dashboard
+        View and manage all incoming orders
+    -->
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-staff">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <span class="logo">👨‍🍳</span>
+                <span>Staff Portal</span>
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link">Dashboard</a></li>
+                <li><a href="dashboard.html" class="nav-link active">Orders</a></li>
+                <li><a href="menu-manage.html" class="nav-link">Menu</a></li>
+                <li>
+                    <span class="nav-link">👤 <span class="user-name">Staff</span></span>
+                </li>
+                <li>
+                    <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="hero hero-staff" style="padding: 2rem 0;">
+        <div class="container">
+            <h1 class="hero-title" style="font-size: 2rem;">Order Management 📋</h1>
+            <p class="hero-subtitle" style="font-size: 1rem;">Process orders and keep customers happy</p>
+        </div>
+    </section>
+    
+    <!-- Stats Overview -->
+    <section class="page-section" style="padding-bottom: 0;">
+        <div class="container">
+            <div class="dashboard-stats">
+                <div class="stat-card staff">
+                    <div class="stat-number" id="pendingCount">0</div>
+                    <div class="stat-label">⏳ Pending</div>
+                </div>
+                <div class="stat-card staff">
+                    <div class="stat-number" id="preparingCount">0</div>
+                    <div class="stat-label">👨‍🍳 Preparing</div>
+                </div>
+                <div class="stat-card staff">
+                    <div class="stat-number" id="readyCount">0</div>
+                    <div class="stat-label">✅ Ready</div>
+                </div>
+                <div class="stat-card staff">
+                    <div class="stat-number" id="completedCount">0</div>
+                    <div class="stat-label">🎉 Completed</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Orders Section -->
+    <section class="page-section">
+        <div class="container">
+            <!-- Filter Tabs -->
+            <div class="tabs" style="margin-bottom: 1.5rem;">
+                <div class="tab active order-filter-tab" data-status="all">All Active</div>
+                <div class="tab order-filter-tab" data-status="pending">⏳ Pending</div>
+                <div class="tab order-filter-tab" data-status="preparing">👨‍🍳 Preparing</div>
+                <div class="tab order-filter-tab" data-status="ready">✅ Ready</div>
+            </div>
+            
+            <!-- Orders List -->
+            <div class="orders-list" id="ordersContainer">
+                <!-- Orders will be loaded here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer style="background: var(--black); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">🍽️ SUSL Smart Digital Canteen - Staff Portal</p>
+            <p style="color: var(--gray); font-size: 0.875rem;">© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/orders.js"></script>
+    <script src="../js/staff.js"></script>
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize staff dashboard (checks auth)
+            initStaffDashboard();
+            
+            // Setup filter tabs
+            setupOrderFilterTabs();
+        });
+    </script>
+</body>
+</html>

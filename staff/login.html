@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Login - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 
+        Staff Login Page
+        Staff members can login to manage orders
+    -->
+    
+    <div class="auth-container" style="background: linear-gradient(135deg, var(--staff-primary) 0%, var(--staff-primary-dark) 100%);">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">👨‍🍳</div>
+                <h1 class="auth-title">Staff Login</h1>
+                <p class="auth-subtitle">Login to manage orders</p>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="staffLoginForm">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" name="email" class="form-input staff-input" 
+                           placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-input staff-input" 
+                           placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-staff-primary btn-block btn-lg">
+                    🔐 Login
+                </button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="register.html" style="color: var(--staff-primary);">Register here</a></p>
+                <p style="margin-top: 0.5rem;">
+                    <a href="../index.html">← Back to Home</a>
+                </p>
+            </div>
+            
+            <!-- Demo Credentials -->
+            <div class="alert alert-info mt-lg">
+                <strong>Demo Staff:</strong><br>
+                Email: john@canteen.com<br>
+                Password: staff123
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // Initialize login form for staff role
+        document.addEventListener('DOMContentLoaded', () => {
+            setupLoginForm('staffLoginForm', USER_ROLES.STAFF);
+            
+            // Check if already logged in
+            const currentUser = getCurrentUser();
+            if (currentUser && currentUser.role === USER_ROLES.STAFF) {
+                navigateTo('landing.html');
+            }
+        });
+    </script>
+</body>
+</html>

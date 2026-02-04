@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 
+        Admin Login Page
+        Admins can login to manage staff and settings
+    -->
+    
+    <div class="auth-container" style="background: linear-gradient(135deg, var(--admin-primary) 0%, var(--admin-primary-dark) 100%);">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">👑</div>
+                <h1 class="auth-title">Admin Login</h1>
+                <p class="auth-subtitle">Access the admin panel</p>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" name="email" class="form-input admin-input" 
+                           placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-input admin-input" 
+                           placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-admin-primary btn-block btn-lg">
+                    🔐 Login
+                </button>
+            </form>
+            
+            <div class="auth-footer">
+                <p style="margin-top: 0.5rem;">
+                    <a href="../index.html">← Back to Home</a>
+                </p>
+            </div>
+            
+            <!-- Demo Credentials -->
+            <div class="alert alert-info mt-lg">
+                <strong>Demo Admin:</strong><br>
+                Email: admin@canteen.com<br>
+                Password: admin123
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // Initialize login form for admin role
+        document.addEventListener('DOMContentLoaded', () => {
+            setupLoginForm('adminLoginForm', USER_ROLES.ADMIN);
+            
+            // Check if already logged in
+            const currentUser = getCurrentUser();
+            if (currentUser && currentUser.role === USER_ROLES.ADMIN) {
+                navigateTo('landing.html');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 
+        Customer Landing Page
+        Main dashboard for customers showing featured items and quick actions
+    -->
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-customer">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <span class="logo">🍽️</span>
+                <span>SUSL Canteen</span>
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link active">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="cart.html" class="nav-link cart-badge">
+                    🛒 Cart <span class="cart-count">0</span>
+                </a></li>
+                <li><a href="order-history.html" class="nav-link">My Orders</a></li>
+                <li id="userNav">
+                    <a href="login.html" class="nav-link">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero hero-customer">
+        <div class="container">
+            <h1 class="hero-title">Welcome to SUSL Canteen! 🍕</h1>
+            <p class="hero-subtitle">Delicious food, quick service, convenient ordering</p>
+            <a href="menu.html" class="btn btn-lg" style="background: white; color: var(--customer-primary);">
+                🍔 Browse Menu
+            </a>
+        </div>
+    </section>
+    
+    <!-- Quick Actions Section -->
+    <section class="page-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Quick Actions</h2>
+            </div>
+            
+            <div class="menu-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <a href="menu.html" class="card text-center" style="text-decoration: none;">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">📋</div>
+                    <h3 style="color: var(--customer-primary);">View Menu</h3>
+                    <p style="color: var(--gray-dark); font-size: 0.875rem;">Browse all available items</p>
+                </a>
+                
+                <a href="cart.html" class="card text-center" style="text-decoration: none;">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">🛒</div>
+                    <h3 style="color: var(--customer-primary);">My Cart</h3>
+                    <p style="color: var(--gray-dark); font-size: 0.875rem;">Review and checkout</p>
+                </a>
+                
+                <a href="order-history.html" class="card text-center" style="text-decoration: none;">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">📦</div>
+                    <h3 style="color: var(--customer-primary);">My Orders</h3>
+                    <p style="color: var(--gray-dark); font-size: 0.875rem;">Track your orders</p>
+                </a>
+                
+                <a href="location.html" class="card text-center" style="text-decoration: none;">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">📍</div>
+                    <h3 style="color: var(--customer-primary);">Location</h3>
+                    <p style="color: var(--gray-dark); font-size: 0.875rem;">Find our canteen</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Items Section -->
+    <section class="page-section" style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🔥 Popular Items</h2>
+                <a href="menu.html" class="btn btn-customer-outline">View All</a>
+            </div>
+            
+            <div class="menu-grid" id="featuredItems">
+                <!-- Featured items will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works Section -->
+    <section class="page-section">
+        <div class="container">
+            <h2 class="section-title text-center">How It Works</h2>
+            
+            <div class="menu-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: 2rem;">
+                <div class="card text-center">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem; background: var(--customer-primary-light); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">1</div>
+                    <h3>Browse Menu</h3>
+                    <p style="color: var(--gray-dark);">Explore our delicious food items</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem; background: var(--customer-primary-light); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">2</div>
+                    <h3>Add to Cart</h3>
+                    <p style="color: var(--gray-dark);">Select items and add to your cart</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem; background: var(--customer-primary-light); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">3</div>
+                    <h3>Place Order</h3>
+                    <p style="color: var(--gray-dark);">Get your unique token number</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem; background: var(--customer-primary-light); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">4</div>
+                    <h3>Collect Food</h3>
+                    <p style="color: var(--gray-dark);">Show token to collect your order</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer style="background: var(--black); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">🍽️ SUSL Smart Digital Canteen System</p>
+            <p style="color: var(--gray); font-size: 0.875rem;">© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/cart.js"></script>
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update navigation based on login status
+            updateNavigation();
+            
+            // Load featured items (first 4 items)
+            loadFeaturedItems();
+            
+            // Update cart badge
+            updateCartBadge();
+        });
+        
+        /**
+         * Update navigation based on user login status
+         */
+        function updateNavigation() {
+            const currentUser = getCurrentUser();
+            const userNav = document.getElementById('userNav');
+            
+            if (currentUser && currentUser.role === USER_ROLES.CUSTOMER) {
+                userNav.innerHTML = `
+                    <div class="flex gap-sm" style="align-items: center;">
+                        <span class="nav-link">👤 <span class="user-name">${currentUser.name}</span></span>
+                        <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                    </div>
+                `;
+                setupLogoutButton();
+            }
+        }
+        
+        /**
+         * Load featured menu items
+         */
+        function loadFeaturedItems() {
+            const container = document.getElementById('featuredItems');
+            const items = getMenuItems(true).slice(0, 4);
+            
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <p>No items available at the moment</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = items.map(item => renderMenuItemCard(item)).join('');
+            
+            // Setup add to cart buttons
+            setupAddToCartButtons();
+        }
+    </script>
+</body>
+</html>

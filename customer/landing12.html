@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - SUSL Forklet</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Add Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+
+.item-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+}
+
+.item-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(205, 95, 8, 0.2);
+}
+
+.item-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.item-content {
+    padding: 1.5rem;
+}
+
+.item-category {
+    color: #cd5f08;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.item-name {
+    color: #2d2d2d;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.item-description {
+    color: #999;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-price {
+    color: #cd5f08;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.btn-add-cart {
+    background: #cd5f08;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-add-cart:hover {
+    background: #a34d06;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(205, 95, 8, 0.3);
+}
+
+.location-card {
+    background-image: url('location.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.location-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(0.01px);
+    z-index: 1;
+}
+
+.location-card-content {
+    position: relative;
+    z-index: 2;
+}
+
+.location-card:hover {
+    transform: scale(1.08) translateY(-10px);
+    box-shadow: 0 20px 40px rgba(205, 95, 8, 0.3);
+}
+
+.location-card:hover .location-card-content div {
+    transform: scale(1.1);
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand img {
+    height: 50px;
+    width: auto;
+}
+
+.hero-image-hover:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Hover Animation for Circle Steps */
+.step-circle .circle-wrapper:hover {
+    transform: scale(1.08) translateY(-10px);
+    box-shadow: 0 20px 40px rgba(205, 95, 8, 0.3);
+}
+
+.step-circle .circle-wrapper:hover img {
+    transform: scale(1.1);
+}
+
+.step-circle:hover h3 {
+    color: #a34d06;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 1200px) {
+    .step-circle .circle-wrapper {
+        width: 200px !important;
+        height: 200px !important;
+    }
+}
+
+@media (max-width: 968px) {
+    section > div > div:nth-child(2) {
+        flex-direction: column !important;
+        gap: 2rem !important;
+    }
+    
+    section > div > div:nth-child(2) > div[style*="width: 60px"] {
+        display: none !important;
+    }
+}
+
+/* Navigation Bar - Black Background & White Text Override */
+.navbar {
+    background-color: #000000 !important;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+}
+
+.navbar-toggle {
+    color: #ffffff !important;
+}
+
+.nav-link {
+    color: #ffffff !important;
+}
+
+/* Mobile Navigation Override */
+@media (max-width: 768px) {
+    .navbar-nav {
+        background-color: #000000 !important;
+    }
+    
+    .navbar-nav .nav-link {
+        color: #ffffff !important;
+        border-bottom: 1px solid #333 !important;
+    }
+}
+
+/* Modern Orange Theme Overrides */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Scroll Animation - Fade In & Slide Up */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Initial state - elements hidden before scroll */
+.animate-on-scroll {
+    opacity: 0;
+}
+
+/* Apply animations only when visible */
+section.animate-visible {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Hero section animations */
+.hero-grid > div:first-child.animate-visible {
+    animation: slideInLeft 1s ease-out forwards;
+}
+
+.hero-grid > div:last-child.animate-visible {
+    animation: slideInRight 1s ease-out forwards;
+}
+
+/* Section headers animation */
+section h2.animate-visible,
+section h3.animate-visible {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+section p[style*="text-transform: uppercase"].animate-visible {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Cards animation with staggered delay */
+.benefit-card.animate-visible {
+    animation: scaleIn 0.6s ease-out forwards;
+}
+
+.benefit-card.animate-visible:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.benefit-card.animate-visible:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+/* Action cards animation */
+.action-card-hover.animate-visible {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.action-card-hover.animate-visible:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.action-card-hover.animate-visible:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.action-card-hover.animate-visible:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.action-card-hover.animate-visible:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+/* Item cards animation */
+.item-card.animate-visible {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.item-card.animate-visible:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.item-card.animate-visible:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.item-card.animate-visible:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* Step circles animation */
+.step-circle.animate-visible {
+    animation: scaleIn 0.8s ease-out forwards;
+}
+
+.step-circle.animate-visible:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.step-circle.animate-visible:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.step-circle.animate-visible:nth-child(5) {
+    animation-delay: 0.6s;
+}
+
+.step-circle.animate-visible:nth-child(7) {
+    animation-delay: 0.8s;
+}
+
+/* Smooth transitions for all interactive elements */
+.action-card-hover,
+.item-card,
+.benefit-card,
+.location-card,
+.btn-hero-hover,
+.btn-add-cart,
+.step-circle .circle-wrapper {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced hover effects */
+.action-card-hover:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(205, 95, 8, 0.25) !important;
+}
+
+.item-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 45px rgba(205, 95, 8, 0.25);
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(205, 95, 8, 0.2);
+}
+
+/* Button animations */
+.btn-hero-hover,
+.btn-add-cart,
+a[style*="background: #cd5f08"] {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-hero-hover::before,
+.btn-add-cart::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-hero-hover:hover::before,
+.btn-add-cart:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Image hover effects */
+.hero-image-hover {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-image-hover:hover {
+    transform: scale(1.05) rotate(1deg);
+}
+
+.item-image {
+    transition: transform 0.5s ease;
+}
+
+.item-card:hover .item-image {
+    transform: scale(1.1);
+}
+
+/* Text fade-in on scroll - using opacity */
+section > div > div > p,
+section > div > div > h2,
+section > div > div > h3 {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Video container animation */
+#forkletDemoVideo {
+    animation: fadeIn 1.2s ease-out;
+}
+
+/* Location card special animation */
+.location-card {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.location-card:hover {
+    transform: scale(1.05) translateY(-15px) rotate(-1deg);
+    box-shadow: 0 25px 50px rgba(205, 95, 8, 0.35);
+}
+
+/* Pulse animation for decorative elements */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.1; }
+    50% { transform: scale(1.5); opacity: 0.2; }
+}
+
+/* Connecting lines fade-in */
+section > div > div[style*="display: flex"] > div[style*="width: 60px"] {
+    animation: fadeIn 1s ease-out;
+    animation-delay: 1s;
+    animation-fill-mode: both;
+}
+
+/* Navbar animation on page load */
+.navbar {
+    animation: slideInDown 0.6s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Footer animation */
+footer {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Hero Section Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.1; }
+    50% { transform: scale(1.5); opacity: 0.2; }
+}
+
+.hero-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.hero-pulse {
+    animation: pulse 4s ease-in-out infinite;
+}
+
+/* Card Hover Effects */
+.action-card-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(205, 95, 8, 0.2) !important;
+}
+
+/* Button Hover */
+.btn-hero-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3) !important;
+}
+
+/* Step Number Styling */
+.step-number-gradient {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #cd5f08, #a34d06);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 5px 15px rgba(205, 95, 8, 0.3);
+}
+
+/* Responsive Hero */
+@media (max-width: 968px) {
+    .hero-grid {
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+    }
+    .hero-title {
+        font-size: 2.5rem !important;
+    }
+}
+
+/* Mobile Responsive - Only Viewport Adjustments */
+@media (max-width: 768px) {
+    /* Make hero section stack vertically on mobile */
+    .hero-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Make two-column sections stack on mobile */
+    section > div > div[style*="grid-template-columns: repeat(2, 1fr)"],
+    section > div > div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Make circles stack vertically on mobile */
+    section > div > div[style*="display: flex; justify-content: center"] {
+        flex-wrap: wrap !important;
+    }
+    
+    /* Hide connecting lines on very small screens */
+    @media (max-width: 640px) {
+        section > div > div[style*="display: flex; justify-content: center"] > div[style*="width: 60px"] {
+            display: none !important;
+        }
+    }
+}
+
+/* Tablet Responsive */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .step-circle .circle-wrapper {
+        width: 200px !important;
+        height: 200px !important;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar - With Black Background & White Text -->
+    <nav class="navbar navbar-customer" style="background-color: #000000;">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <img src="logo1.jpg" alt="SUSL Forklet Logo">
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation" style="color: #ffffff;">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link active" style="color: #ffffff;">Home</a></li>
+                <li><a href="menu.html" class="nav-link" style="color: #ffffff;">Menu</a></li>
+                <li><a href="cart.html" class="nav-link cart-badge" style="color: #ffffff;">
+                    🛒 Cart <span class="cart-count">0</span>
+                </a></li>
+                <li><a href="order-history.html" class="nav-link" style="color: #ffffff;">My Orders</a></li>
+                <li id="userNav">
+                    <a href="login.html" class="nav-link" style="color: #ffffff;">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section - UPDATED WITH TWO COLUMNS -->
+    <section style="background: url('1.png') center/cover no-repeat; padding: 6rem 2rem; position: relative; overflow: hidden;">
+        <!-- Decorative Elements -->
+        <div class="hero-pulse" style="position: absolute; width: 100px; height: 100px; background: #cd5f08; border-radius: 50%; opacity: 0.1; top: -50px; right: -50px;"></div>
+        <div class="hero-pulse" style="position: absolute; width: 100px; height: 100px; background: #cd5f08; border-radius: 50%; opacity: 0.1; bottom: -30px; left: -30px; animation-delay: 2s;"></div>
+        
+        <div class="hero-grid" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1;">
+            <!-- Hero Content -->
+            <div>
+                <p style="color: #fff5e6; font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 500;">Welcome to SUSL Forklet</p>
+                <h1 class="hero-title" style="color: white; font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem;">Smart Dining Starts Here</h1>
+                <p style="color: rgba(255,255,255,0.9); font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">
+                    Smart campus canteen system designed to make food ordering faster, easier, and completely hassle-free. Whether you're a busy student or looking to order, we've made it easier to eat your meal.
+                </p>
+                <a href="menu.html" class="btn-hero-hover" style="background: white; color: #cd5f08; padding: 1rem 2.5rem; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.3s, box-shadow 0.3s;">
+                    🍔 Get Started
+                </a>
+            </div>
+            
+            <!-- Hero Image -->
+            <div style="position: relative;">
+                <img src="https://static.wixstatic.com/media/6878d0_93fb27577fb8442a8e1466a122641f35~mv2.png/v1/fill/w_925,h_736,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/food-Photoroom.png" alt="Delicious Food" class="hero-float hero-image-hover" style="width: 100%; border-radius: 0px; transition: all 0s ease; opacity: 0.9;">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Students Love Forklet Section - NEW -->
+    <section style="padding: 5rem 2rem; background: white;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <!-- Section Header -->
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <p style="color: #cd5f08; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">Built for Convenience. Made for You</p>
+                <h2 style="font-size: 2.5rem; font-weight: 800; color: #2d2d2d;">Why Students Love Forklet</h2>
+            </div>
+
+            <!-- Benefits Grid -->
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 4rem;">
+                <!-- Benefit 3 -->
+                <div class="benefit-card" style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 5px 20px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: center; min-height: 350px;">
+                    <div style="text-align: center;">
+                        <span style="font-size: 4rem; margin-bottom: 1rem; display: block;">⏱️</span>
+                        <p style="color: #cd5f08; font-size: 1.2rem; font-weight: 600; line-height: 1.4; margin: 0;">"No more waiting — browse, select, and order your meal in just a few taps."</p>
+                    </div>
+                </div>
+
+                <!-- Benefit 4 - Location Card -->
+                <a href="location.html" class="benefit-card location-card" style="border-radius: 20px; position: relative; min-height: 350px; cursor: pointer; text-decoration: none; transition: all 0.4s ease; display: flex; align-items: center; justify-content: center;">
+                    <div class="location-card-content" style="text-align: center;">
+                        <div style="margin-bottom: 1rem; transition: transform 0.4s ease;">
+                            <img src="https://img.icons8.com/?size=100&id=YyEbAVyRYrMX&format=png&color=FD7E14" alt="Location" style="width: 80px; height: auto;">
+                        </div>
+                        <h3 style="color: #cd5f08; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Location</h3>
+                        <p style="color: #666; font-size: 1rem; margin: 0;">Find our canteens</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How Forklet Works Section - UPDATED WITH LEFT VIDEO/RIGHT CONTENT -->
+    <section style="padding: 5rem 2rem; background: white;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+                <!-- Left Side - Video Only -->
+                <div style="position: relative; display: flex; justify-content: center; align-items: center;">
+                    <!-- Video Container -->
+                    <div style="position: relative; width: 100%; max-width: 900px; overflow: hidden;">
+                        <video 
+                            id="forkletDemoVideo" 
+                            autoplay 
+                            muted 
+                            loop 
+                            playsinline
+                            style="width: 110%; height: 130%; display: block;">
+                            <source src="file.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+
+                <!-- Right Side - Content -->
+                <div>
+                    <p style="color: #cd5f08; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">let's try Forklet</p>
+                    <h2 style="font-size: 2.8rem; font-weight: 800; color: #2d2d2d; margin-bottom: 1.5rem; line-height: 1.2;">How Forklet Works</h2>
+                    <p style="color: #666; font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem;">
+                        Forklet is a smart campus canteen system that simplifies food ordering by allowing users to quickly browse the menu, scan meals, and place orders with ease—perfect for busy students on the go, with no waiting or hassle.
+                    </p>
+                    
+                    <!-- Decorative Food Image -->
+                    <div style="position: relative; margin-top: 2rem;">
+                        <img src="https://static.wixstatic.com/media/6878d0_5bcac2035c304b4c95631ed4a2f16ccc~mv2.png/v1/fill/w_299,h_245,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/wixagency_front_view_floating_one_3D_element_of_heart_icon_in_s_dd17aaf2-92d9-4274-8bae-44.png&fit=crop" alt="Decorative Icon" style="width: 300px;">
+                    </div>
+
+                    <a href="menu.html" style="margin-top: 2rem; display: inline-block; background: #cd5f08; color: white; padding: 1rem 2.5rem; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; box-shadow: 0 4px 15px rgba(205, 95, 8, 0.3); transition: transform 0.3s, box-shadow 0.3s;">
+                        TRY NOW
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Actions Section - UPDATED -->
+    <section style="padding: 5rem 2rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.5rem; font-weight: 800; color: #2d2d2d; margin-bottom: 0.5rem;">Quick Actions</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                <a href="menu.html" class="action-card-hover" style="background: white; padding: 2.5rem 2rem; border-radius: 20px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: all 0.3s; cursor: pointer; text-decoration: none; color: #2d2d2d;">
+                    <div style="font-size: 3.5rem; margin-bottom: 1rem;">📋</div>
+                    <h3 style="color: #cd5f08; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;">View Menu</h3>
+                    <p style="color: #666; font-size: 0.95rem; margin: 0;">Browse all available items</p>
+                </a>
+                
+                <a href="cart.html" class="action-card-hover" style="background: white; padding: 2.5rem 2rem; border-radius: 20px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: all 0.3s; cursor: pointer; text-decoration: none; color: #2d2d2d;">
+                    <div style="font-size: 3.5rem; margin-bottom: 1rem;">🛒</div>
+                    <h3 style="color: #cd5f08; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;">My Cart</h3>
+                    <p style="color: #666; font-size: 0.95rem; margin: 0;">Review and checkout</p>
+                </a>
+                
+                <a href="order-history.html" class="action-card-hover" style="background: white; padding: 2.5rem 2rem; border-radius: 20px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: all 0.3s; cursor: pointer; text-decoration: none; color: #2d2d2d;">
+                    <div style="font-size: 3.5rem; margin-bottom: 1rem;">📦</div>
+                    <h3 style="color: #cd5f08; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem;">My Orders</h3>
+                    <p style="color: #666; font-size: 0.95rem; margin: 0;">Track your orders</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Items Section - UPDATED WITH CREAM BACKGROUND -->
+    <section class="page-section" style="background: #ffecd9; padding: 5rem 2rem;">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                <p style="color: #cd5f08; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem;">let's try Forklet</p>
+                <h2 class="section-title" style="font-size: 2.5rem; font-weight: 800; color: #2d2d2d; margin-bottom: 1rem;">🔥 Popular Items</h2>
+                <a href="menu.html" class="btn btn-customer-outline">View All</a>
+            </div>
+            
+            <div class="menu-grid" id="featuredItems">
+                <!-- Featured items will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- How Forklet Works Section - NEW DESIGN WITH 4 CIRCLES -->
+    <section style="padding: 5rem 2rem; background: white;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <!-- Section Header -->
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <h2 style="font-size: 3rem; font-weight: 800; color: #2d2d2d; margin: 0;">How It Works</h2>
+            </div>
+            
+            <!-- Steps Container -->
+            <div style="display: flex; justify-content: center; align-items: center; gap: 0; position: relative;">
+                
+                <!-- Step 1 -->
+                <div class="step-circle" style="position: relative; text-align: center; z-index: 2;">
+                    <div class="circle-wrapper" style="width: 240px; height: 240px; border-radius: 50%; overflow: hidden; border: 6px solid #cd5f08; position: relative; transition: all 0.4s ease; cursor: pointer;">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=600&fit=crop" alt="Browse Menu" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                        <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: #2d2d2d; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; border: 3px solid white;">01</div>
+                    </div>
+                    <h3 style="color: #cd5f08; font-size: 1.3rem; font-weight: 700; margin-top: 1.2rem; margin-bottom: 0.5rem;">Browse Menu</h3>
+                    <p style="color: #999; font-size: 0.9rem; max-width: 220px; margin: 0 auto;">Explore our delicious food items</p>
+                </div>
+
+                <!-- Connecting Line 1 -->
+                <div style="width: 60px; height: 6px; background: #cd5f08; position: relative; top: -60px; z-index: 1;"></div>
+                
+                <!-- Step 2 -->
+                <div class="step-circle" style="position: relative; text-align: center; z-index: 2;">
+                    <div class="circle-wrapper" style="width: 240px; height: 240px; border-radius: 50%; overflow: hidden; border: 6px solid #cd5f08; position: relative; transition: all 0.4s ease; cursor: pointer;">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=600&fit=crop" alt="Add to Cart" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                        <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: #2d2d2d; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; border: 3px solid white;">02</div>
+                    </div>
+                    <h3 style="color: #cd5f08; font-size: 1.3rem; font-weight: 700; margin-top: 1.2rem; margin-bottom: 0.5rem;">Add to Cart</h3>
+                    <p style="color: #999; font-size: 0.9rem; max-width: 220px; margin: 0 auto;">Select items and add to your cart</p>
+                </div>
+
+                <!-- Connecting Line 2 -->
+                <div style="width: 60px; height: 6px; background: #cd5f08; position: relative; top: -60px; z-index: 1;"></div>
+                
+                <!-- Step 3 -->
+                <div class="step-circle" style="position: relative; text-align: center; z-index: 2;">
+                    <div class="circle-wrapper" style="width: 240px; height: 240px; border-radius: 50%; overflow: hidden; border: 6px solid #cd5f08; position: relative; transition: all 0.4s ease; cursor: pointer;">
+                        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600&h=600&fit=crop" alt="Place Order" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                        <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: #2d2d2d; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; border: 3px solid white;">03</div>
+                    </div>
+                    <h3 style="color: #cd5f08; font-size: 1.3rem; font-weight: 700; margin-top: 1.2rem; margin-bottom: 0.5rem;">Place Order</h3>
+                    <p style="color: #999; font-size: 0.9rem; max-width: 220px; margin: 0 auto;">Get your unique token number instantly</p>
+                </div>
+
+                <!-- Connecting Line 3 -->
+                <div style="width: 60px; height: 6px; background: #cd5f08; position: relative; top: -60px; z-index: 1;"></div>
+                
+                <!-- Step 4 -->
+                <div class="step-circle" style="position: relative; text-align: center; z-index: 2;">
+                    <div class="circle-wrapper" style="width: 240px; height: 240px; border-radius: 50%; overflow: hidden; border: 6px solid #cd5f08; position: relative; transition: all 0.4s ease; cursor: pointer;">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=600&fit=crop" alt="Collect Food" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                        <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: #2d2d2d; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; border: 3px solid white;">04</div>
+                    </div>
+                    <h3 style="color: #cd5f08; font-size: 1.3rem; font-weight: 700; margin-top: 1.2rem; margin-bottom: 0.5rem;">Collect Food</h3>
+                    <p style="color: #999; font-size: 0.9rem; max-width: 220px; margin: 0 auto;">Show token to collect your order</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer style="background: var(--black); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">🍽️ SUSL Smart Digital Canteen System</p>
+            <p style="color: var(--gray); font-size: 0.875rem;">© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/cart.js"></script>
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update navigation based on login status
+            updateNavigation();
+            
+            // Load featured items (first 3 items)
+            loadFeaturedItems();
+            
+            // Update cart badge
+            updateCartBadge();
+            
+            // Initialize scroll animations
+            initScrollAnimations();
+        });
+        
+        /**
+         * Update navigation based on user login status
+         */
+        function updateNavigation() {
+            const currentUser = getCurrentUser();
+            const userNav = document.getElementById('userNav');
+            
+            if (currentUser && currentUser.role === USER_ROLES.CUSTOMER) {
+                userNav.innerHTML = `
+                    <div class="flex gap-sm" style="align-items: center;">
+                        <span class="nav-link">👤 <span class="user-name">${currentUser.name}</span></span>
+                        <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                    </div>
+                `;
+                setupLogoutButton();
+            }
+        }
+        
+        /**
+         * Load featured menu items
+         */
+        function loadFeaturedItems() {
+            const container = document.getElementById('featuredItems');
+            const items = getMenuItems(true).slice(0, 3); // Get first 3 available items
+            
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <p>No items available at the moment</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = items.map(item => `
+                <div class="item-card animate-on-scroll">
+                    <img src="${item.image}" class="item-image" alt="${item.name}">
+                    <div class="item-content">
+                        <div class="item-category">${item.category.toUpperCase()}</div>
+                        <h3 class="item-name">${item.name}</h3>
+                        <p class="item-description">${item.description}</p>
+                        <div class="item-footer">
+                            <div class="item-price">${formatCurrency(item.price)}</div>
+                            <button class="btn-add-cart add-to-cart-btn" data-item-id="${item.id}">
+                                ➕ Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Setup add to cart buttons
+            setupAddToCartButtons();
+            
+            // Re-initialize scroll animations for dynamically loaded items
+            initScrollAnimations();
+        }
+        
+        /**
+         * Initialize scroll animations using Intersection Observer
+         */
+        function initScrollAnimations() {
+            // Create intersection observer
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-visible');
+                        // Optional: unobserve after animation to improve performance
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Select all elements to animate
+            const animateElements = document.querySelectorAll(`
+                section,
+                .benefit-card,
+                .action-card-hover,
+                .item-card,
+                .step-circle,
+                .hero-grid > div,
+                section h2,
+                section h3,
+                section p[style*="text-transform: uppercase"]
+            `);
+            
+            // Observe each element
+            animateElements.forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+        }
+    </script>
+</body>
+</html>

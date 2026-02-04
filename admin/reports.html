@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 
+        Admin Reports Page
+        View daily performance reports and analytics
+    -->
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-admin">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <span class="logo">👑</span>
+                <span>Admin Panel</span>
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link">Dashboard</a></li>
+                <li><a href="staff-manage.html" class="nav-link">Staff</a></li>
+                <li><a href="location.html" class="nav-link">Location</a></li>
+                <li><a href="reports.html" class="nav-link active">Reports</a></li>
+                <li>
+                    <span class="nav-link">👤 <span class="user-name">Admin</span></span>
+                </li>
+                <li>
+                    <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="hero hero-admin" style="padding: 2rem 0;">
+        <div class="container">
+            <h1 class="hero-title" style="font-size: 2rem;">Reports & Analytics 📊</h1>
+            <p class="hero-subtitle" style="font-size: 1rem;">View performance reports</p>
+        </div>
+    </section>
+    
+    <!-- Reports Section -->
+    <section class="page-section">
+        <div class="container">
+            <!-- Daily Report -->
+            <div id="dailyReportContainer">
+                <!-- Daily report will be loaded here -->
+            </div>
+            
+            <!-- Staff Performance -->
+            <div class="card mt-lg">
+                <h3>👥 Staff Performance Today</h3>
+                <div id="staffPerformanceContainer" class="mt-md">
+                    <!-- Staff performance will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Recent Orders -->
+            <div class="card mt-lg">
+                <h3>📋 Recent Completed Orders</h3>
+                <div id="recentOrdersContainer" class="mt-md">
+                    <!-- Recent orders will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer style="background: var(--black); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">🍽️ SUSL Smart Digital Canteen - Admin Panel</p>
+            <p style="color: var(--gray); font-size: 0.875rem;">© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/orders.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check authentication
+            if (!protectPage(USER_ROLES.ADMIN)) return;
+            
+            // Update user name
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                document.querySelector('.user-name').textContent = currentUser.name;
+            }
+            
+            // Load reports
+            renderDailyReport('dailyReportContainer');
+            loadStaffPerformance();
+            loadRecentOrders();
+            
+            // Setup handlers
+            setupLogoutButton();
+        });
+        
+        /**
+         * Load staff performance data
+         */
+        function loadStaffPerformance() {
+            const container = document.getElementById('staffPerformanceContainer');
+            const staffMembers = getFromStorage(STORAGE_KEYS.STAFF_MEMBERS) || [];
+            
+            if (staffMembers.length === 0) {
+                container.innerHTML = `<p style="color: var(--gray-dark);">No staff members registered yet.</p>`;
+                return;
+            }
+            
+            let html = `
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Staff Member</th>
+                            <th>Email</th>
+                            <th>Total Orders</th>
+                            <th>Joined</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            staffMembers.forEach(staff => {
+                html += `
+                    <tr>
+                        <td><strong>${staff.name}</strong></td>
+                        <td>${staff.email}</td>
+                        <td>${staff.ordersCompleted || 0}</td>
+                        <td>${formatDateShort(staff.joinedAt)}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = html;
+        }
+        
+        /**
+         * Load recent completed orders
+         */
+        function loadRecentOrders() {
+            const container = document.getElementById('recentOrdersContainer');
+            const orders = getAllOrders()
+                .filter(o => o.status === ORDER_STATUS.COMPLETED)
+                .sort((a, b) => new Date(b.completedAt || b.updatedAt) - new Date(a.completedAt || a.updatedAt))
+                .slice(0, 10);
+            
+            if (orders.length === 0) {
+                container.innerHTML = `<p style="color: var(--gray-dark);">No completed orders yet.</p>`;
+                return;
+            }
+            
+            let html = `
+                <table class="menu-table">
+                    <thead>
+                        <tr>
+                            <th>Token</th>
+                            <th>Customer</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Completed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            orders.forEach(order => {
+                const itemsSummary = order.items.map(i => `${i.quantity}x ${i.name}`).join(', ');
+                html += `
+                    <tr>
+                        <td><strong>${order.token}</strong></td>
+                        <td>${order.userName}</td>
+                        <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;">
+                            ${itemsSummary.length > 50 ? itemsSummary.substring(0, 50) + '...' : itemsSummary}
+                        </td>
+                        <td>${formatCurrency(order.total)}</td>
+                        <td>${formatDate(order.completedAt || order.updatedAt)}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

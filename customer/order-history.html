@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 
+        Order History Page
+        Shows all past and current orders for the customer
+    -->
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-customer">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <span class="logo">🍽️</span>
+                <span>SUSL Canteen</span>
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="cart.html" class="nav-link cart-badge">
+                    🛒 Cart <span class="cart-count">0</span>
+                </a></li>
+                <li><a href="order-history.html" class="nav-link active">My Orders</a></li>
+                <li id="userNav">
+                    <a href="login.html" class="nav-link">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="hero hero-customer" style="padding: 2rem 0;">
+        <div class="container">
+            <h1 class="hero-title" style="font-size: 2rem;">Order History 📦</h1>
+            <p class="hero-subtitle" style="font-size: 1rem;">View all your past orders</p>
+        </div>
+    </section>
+    
+    <!-- Order History Section -->
+    <section class="page-section">
+        <div class="container" style="max-width: 800px;">
+            <div id="orderHistoryContainer">
+                <!-- Order history will be loaded here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer style="background: var(--black); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">🍽️ SUSL Smart Digital Canteen System</p>
+            <p style="color: var(--gray); font-size: 0.875rem;">© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/orders.js"></script>
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update navigation
+            updateNavigation();
+            
+            // Load order history
+            renderOrderHistory('orderHistoryContainer');
+            
+            // Update cart badge
+            updateCartBadge();
+        });
+        
+        /**
+         * Update navigation based on user login status
+         */
+        function updateNavigation() {
+            const currentUser = getCurrentUser();
+            const userNav = document.getElementById('userNav');
+            
+            if (currentUser && currentUser.role === USER_ROLES.CUSTOMER) {
+                userNav.innerHTML = `
+                    <div class="flex gap-sm" style="align-items: center;">
+                        <span class="nav-link">👤 <span class="user-name">${currentUser.name}</span></span>
+                        <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                    </div>
+                `;
+                setupLogoutButton();
+            }
+        }
+    </script>
+</body>
+</html>

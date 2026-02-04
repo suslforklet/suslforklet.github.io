@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Location - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 
+        Admin Location Settings Page
+        Set and manage shop location for customers to find
+    -->
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-admin">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <span class="logo">👑</span>
+                <span>Admin Panel</span>
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link">Dashboard</a></li>
+                <li><a href="staff-manage.html" class="nav-link">Staff</a></li>
+                <li><a href="location.html" class="nav-link active">Location</a></li>
+                <li><a href="reports.html" class="nav-link">Reports</a></li>
+                <li>
+                    <span class="nav-link">👤 <span class="user-name">Admin</span></span>
+                </li>
+                <li>
+                    <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="hero hero-admin" style="padding: 2rem 0;">
+        <div class="container">
+            <h1 class="hero-title" style="font-size: 2rem;">Shop Location 📍</h1>
+            <p class="hero-subtitle" style="font-size: 1rem;">Set your canteen location for customers</p>
+        </div>
+    </section>
+    
+    <!-- Location Settings Section -->
+    <section class="page-section">
+        <div class="container" style="max-width: 800px;">
+            <div id="locationFormContainer">
+                <!-- Location form will be loaded here -->
+            </div>
+            
+            <!-- Help Tips -->
+            <div class="card mt-lg">
+                <h3>💡 Tips for Setting Location</h3>
+                <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--gray-dark);">
+                    <li style="margin-bottom: 0.5rem;">
+                        <strong>Get coordinates:</strong> Visit <a href="https://www.google.com/maps" target="_blank" style="color: var(--admin-primary);">Google Maps</a>, 
+                        right-click on your location, and copy the coordinates.
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">
+                        <strong>Latitude:</strong> First number (e.g., 6.7106 for Sabaragamuwa)
+                    </li>
+                    <li style="margin-bottom: 0.5rem;">
+                        <strong>Longitude:</strong> Second number (e.g., 80.7846 for Belihuloya)
+                    </li>
+                    <li>
+                        Customers will use this location to get directions to your canteen.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer style="background: var(--black); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">🍽️ SUSL Smart Digital Canteen - Admin Panel</p>
+            <p style="color: var(--gray); font-size: 0.875rem;">© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check authentication
+            if (!protectPage(USER_ROLES.ADMIN)) return;
+            
+            // Update user name
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                document.querySelector('.user-name').textContent = currentUser.name;
+            }
+            
+            // Load location form
+            renderShopLocationForm('locationFormContainer');
+            
+            // Setup handlers
+            setupLogoutButton();
+        });
+    </script>
+</body>
+</html>

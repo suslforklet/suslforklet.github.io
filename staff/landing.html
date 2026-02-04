@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 
+        Staff Landing/Dashboard Page
+        Main dashboard for staff to view quick actions and stats
+    -->
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-staff">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <span class="logo">👨‍🍳</span>
+                <span>Staff Portal</span>
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link active">Dashboard</a></li>
+                <li><a href="dashboard.html" class="nav-link">Orders</a></li>
+                <li><a href="menu-manage.html" class="nav-link">Menu</a></li>
+                <li>
+                    <span class="nav-link">👤 <span class="user-name">Staff</span></span>
+                </li>
+                <li>
+                    <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero hero-staff" style="padding: 2rem 0;">
+        <div class="container">
+            <h1 class="hero-title" style="font-size: 2rem;">Welcome Back! 👨‍🍳</h1>
+            <p class="hero-subtitle" style="font-size: 1rem;">Manage orders and keep customers happy</p>
+        </div>
+    </section>
+    
+    <!-- Quick Stats -->
+    <section class="page-section">
+        <div class="container">
+            <h2 class="section-title">Today's Overview</h2>
+            
+            <div class="dashboard-stats">
+                <div class="stat-card staff">
+                    <div class="stat-number" id="pendingCount">0</div>
+                    <div class="stat-label">⏳ Pending Orders</div>
+                </div>
+                <div class="stat-card staff">
+                    <div class="stat-number" id="preparingCount">0</div>
+                    <div class="stat-label">👨‍🍳 Preparing</div>
+                </div>
+                <div class="stat-card staff">
+                    <div class="stat-number" id="readyCount">0</div>
+                    <div class="stat-label">✅ Ready for Pickup</div>
+                </div>
+                <div class="stat-card staff">
+                    <div class="stat-number" id="completedCount">0</div>
+                    <div class="stat-label">🎉 Completed</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quick Actions -->
+    <section class="page-section" style="background: white;">
+        <div class="container">
+            <h2 class="section-title">Quick Actions</h2>
+            
+            <div class="menu-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <a href="dashboard.html" class="card text-center" style="text-decoration: none; border-left: 4px solid var(--staff-primary);">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">📋</div>
+                    <h3 style="color: var(--staff-primary);">Manage Orders</h3>
+                    <p style="color: var(--gray-dark); font-size: 0.875rem;">View and process incoming orders</p>
+                </a>
+                
+                <a href="menu-manage.html" class="card text-center" style="text-decoration: none; border-left: 4px solid var(--staff-primary);">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">🍔</div>
+                    <h3 style="color: var(--staff-primary);">Menu Management</h3>
+                    <p style="color: var(--gray-dark); font-size: 0.875rem;">Add, edit, or remove menu items</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recent Orders Preview -->
+    <section class="page-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Recent Pending Orders</h2>
+                <a href="dashboard.html" class="btn btn-staff-outline">View All Orders</a>
+            </div>
+            
+            <div class="orders-list" id="recentOrdersPreview">
+                <!-- Recent orders will be loaded here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer style="background: var(--black); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">🍽️ SUSL Smart Digital Canteen - Staff Portal</p>
+            <p style="color: var(--gray); font-size: 0.875rem;">© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/orders.js"></script>
+    <script src="../js/staff.js"></script>
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check authentication
+            if (!protectPage(USER_ROLES.STAFF)) return;
+            
+            // Update user name
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                document.querySelector('.user-name').textContent = currentUser.name;
+            }
+            
+            // Load stats
+            updateDashboardStats();
+            
+            // Load recent pending orders (limit to 3)
+            loadRecentOrders();
+            
+            // Setup logout
+            setupLogoutButton();
+            
+            // Auto-refresh stats every 30 seconds
+            setInterval(() => {
+                updateDashboardStats();
+                loadRecentOrders();
+            }, 30000);
+        });
+        
+        /**
+         * Load recent pending orders for preview
+         */
+        function loadRecentOrders() {
+            const container = document.getElementById('recentOrdersPreview');
+            const orders = getOrdersByStatus(ORDER_STATUS.PENDING).slice(0, 3);
+            
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" style="padding: 2rem;">
+                        <div class="empty-state-icon">✅</div>
+                        <h3 class="empty-state-title">All caught up!</h3>
+                        <p class="empty-state-text">No pending orders at the moment</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            orders.forEach(order => {
+                const statusInfo = getStatusInfo(order.status);
+                html += `
+                    <div class="order-card ${order.status}">
+                        <div class="order-header">
+                            <span class="order-token">${order.token}</span>
+                            <span class="order-badge ${statusInfo.badge}">${statusInfo.icon} ${statusInfo.label}</span>
+                        </div>
+                        <div style="color: var(--gray-dark); font-size: 0.875rem;">
+                            👤 ${order.userName} • 🕐 ${getRelativeTime(order.createdAt)}
+                        </div>
+                        <div class="order-items mt-sm">
+                            ${order.items.map(item => `
+                                <span style="margin-right: 0.5rem;">${item.quantity}x ${item.name}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

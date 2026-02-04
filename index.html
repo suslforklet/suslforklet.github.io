@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Digital Canteen System - Welcome</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 
+        Smart Digital Canteen System - Main Landing Page
+        This is the entry point of the applications where users can choose their role
+    -->
+    
+    <div class="auth-container" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="auth-card" style="max-width: 500px;">
+            <div class="auth-header">
+                <div class="auth-logo">🍽️</div>
+                <h1 class="auth-title">Smart Digital Canteen</h1>
+                <p class="auth-subtitle">Welcome! Please select your role to continue</p>
+            </div>
+            
+            <!-- Role Selection Cards -->
+            <div class="flex-column gap-md">
+                <!-- Customer Option -->
+                <a href="customer/landing.html" class="card" style="text-decoration: none; border-left: 4px solid var(--customer-primary);">
+                    <div class="flex gap-md" style="align-items: center;">
+                        <div style="font-size: 2.5rem;">👤</div>
+                        <div>
+                            <h3 style="margin-bottom: 0.25rem; color: var(--customer-primary);">Customer</h3>
+                            <p style="margin-bottom: 0; color: var(--gray-dark); font-size: 0.875rem;">
+                                Browse menu, order food & track your orders
+                            </p>
+                        </div>
+                        <div style="margin-left: auto; font-size: 1.5rem;">→</div>
+                    </div>
+                </a>
+                
+                <!-- Staff Option -->
+                <a href="staff/landing.html" class="card" style="text-decoration: none; border-left: 4px solid var(--staff-primary);">
+                    <div class="flex gap-md" style="align-items: center;">
+                        <div style="font-size: 2.5rem;">👨‍🍳</div>
+                        <div>
+                            <h3 style="margin-bottom: 0.25rem; color: var(--staff-primary);">Canteen Staff</h3>
+                            <p style="margin-bottom: 0; color: var(--gray-dark); font-size: 0.875rem;">
+                                Manage orders & update menu items
+                            </p>
+                        </div>
+                        <div style="margin-left: auto; font-size: 1.5rem;">→</div>
+                    </div>
+                </a>
+                
+                <!-- Admin Option -->
+                <a href="admin/landing.html" class="card" style="text-decoration: none; border-left: 4px solid var(--admin-primary);">
+                    <div class="flex gap-md" style="align-items: center;">
+                        <div style="font-size: 2.5rem;">👑</div>
+                        <div>
+                            <h3 style="margin-bottom: 0.25rem; color: var(--admin-primary);">Admin</h3>
+                            <p style="margin-bottom: 0; color: var(--gray-dark); font-size: 0.875rem;">
+                                Manage staff, view reports & settings
+                            </p>
+                        </div>
+                        <div style="margin-left: auto; font-size: 1.5rem;">→</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="text-center mt-lg" style="color: var(--gray-dark); font-size: 0.875rem;">
+                <p>SUSL Forklet - Smart Digital Canteen System</p>
+                <p>© 2026 All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load JavaScript files -->
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

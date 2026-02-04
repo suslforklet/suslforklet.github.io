@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 
+        Admin Landing/Dashboard Page
+        Main dashboard for admin to view stats and manage system
+        hello
+    -->
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-admin">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <span class="logo">👑</span>
+                <span>Admin Panel</span>
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link active">Dashboard</a></li>
+                <li><a href="staff-manage.html" class="nav-link">Staff</a></li>
+                <li><a href="location.html" class="nav-link">Location</a></li>
+                <li><a href="reports.html" class="nav-link">Reports</a></li>
+                <li>
+                    <span class="nav-link">👤 <span class="user-name">Admin</span></span>
+                </li>
+                <li>
+                    <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero hero-admin" style="padding: 2rem 0;">
+        <div class="container">
+            <h1 class="hero-title" style="font-size: 2rem;">Admin Dashboard 👑</h1>
+            <p class="hero-subtitle" style="font-size: 1rem;">Manage your canteen system</p>
+        </div>
+    </section>
+    
+    <!-- Stats Overview -->
+    <section class="page-section">
+        <div class="container">
+            <h2 class="section-title">Today's Overview</h2>
+            
+            <div class="dashboard-stats">
+                <div class="stat-card admin">
+                    <div class="stat-number" id="totalOrders">0</div>
+                    <div class="stat-label">📋 Total Orders</div>
+                </div>
+                <div class="stat-card admin">
+                    <div class="stat-number" id="completedOrders">0</div>
+                    <div class="stat-label">✅ Completed</div>
+                </div>
+                <div class="stat-card admin">
+                    <div class="stat-number" id="pendingOrders">0</div>
+                    <div class="stat-label">⏳ Active Orders</div>
+                </div>
+                <div class="stat-card admin">
+                    <div class="stat-number" id="totalRevenue">Rs. 0</div>
+                    <div class="stat-label">💰 Revenue</div>
+                </div>
+                <div class="stat-card admin">
+                    <div class="stat-number" id="staffCount">0</div>
+                    <div class="stat-label">👥 Staff Members</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quick Actions -->
+    <section class="page-section" style="background: white;">
+        <div class="container">
+            <h2 class="section-title">Quick Actions</h2>
+            
+            <div class="menu-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <a href="staff-manage.html" class="card text-center" style="text-decoration: none; border-left: 4px solid var(--admin-primary);">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">👥</div>
+                    <h3 style="color: var(--admin-primary);">Manage Staff</h3>
+                    <p style="color: var(--gray-dark); font-size: 0.875rem;">Add or remove staff members</p>
+                </a>
+                
+                <a href="location.html" class="card text-center" style="text-decoration: none; border-left: 4px solid var(--admin-primary);">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">📍</div>
+                    <h3 style="color: var(--admin-primary);">Shop Location</h3>
+                    <p style="color: var(--gray-dark); font-size: 0.875rem;">Set your canteen location</p>
+                </a>
+                
+                <a href="reports.html" class="card text-center" style="text-decoration: none; border-left: 4px solid var(--admin-primary);">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">📊</div>
+                    <h3 style="color: var(--admin-primary);">View Reports</h3>
+                    <p style="color: var(--gray-dark); font-size: 0.875rem;">Daily performance reports</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Staff Performance Preview -->
+    <section class="page-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Staff Performance</h2>
+                <a href="staff-manage.html" class="btn btn-admin-outline">View All Staff</a>
+            </div>
+            
+            <div id="staffListContainer">
+                <!-- Staff list will be loaded here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer style="background: var(--black); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">🍽️ SUSL Smart Digital Canteen - Admin Panel</p>
+            <p style="color: var(--gray); font-size: 0.875rem;">© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/orders.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize admin dashboard (checks auth)
+            initAdminDashboard();
+            
+            // Setup logout
+            setupLogoutButton();
+        });
+    </script>
+</body>
+</html>

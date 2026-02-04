@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Hero Section - Modern Orange Design */
+        .hero-customer {
+            background: linear-gradient(135deg, var(--dark-brown, #3d2817) 0%, var(--primary-orange, #cd5f08) 100%);
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-customer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .hero-customer .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-customer .hero-subtitle {
+            color: var(--cream, #fff5e6);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            opacity: 1;
+        }
+
+        .hero-customer .hero-title {
+            color: var(--white);
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-description {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .decorative-element {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: var(--primary-orange, #cd5f08);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .decorative-element:nth-child(1) {
+            top: -50px;
+            right: -50px;
+        }
+
+        .decorative-element:nth-child(2) {
+            bottom: -30px;
+            left: -30px;
+            animation-delay: 2s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.5); opacity: 0.2; }
+        }
+
+        .btn-primary-orange {
+            background: var(--white);
+            color: var(--primary-orange, #cd5f08);
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary-orange:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Enhanced Cards */
+        .card {
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(205, 95, 8, 0.2);
+        }
+
+        .card h3 {
+            color: var(--primary-orange, #cd5f08);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .card .action-icon {
+            font-size: 3.5rem;
+        }
+
+        /* Section Styling */
+        .page-section {
+            padding: 5rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark, #2d2d2d);
+        }
+
+        .section-subtitle {
+            color: var(--primary-orange, #cd5f08);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Popular Items Section */
+        .popular-items-section {
+            background: var(--light-orange, #ffecd9);
+            padding: 5rem 2rem;
+        }
+
+        /* Step Numbers */
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-orange, #cd5f08), var(--dark-orange, #a34d06));
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 5px 15px rgba(205, 95, 8, 0.3);
+        }
+
+        .step-card {
+            padding: 2rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark, #2d2d2d);
+        }
+
+        .step-card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-customer .container {
+                grid-template-columns: 1fr !important;
+                text-align: center;
+            }
+
+            .hero-customer .hero-title {
+                font-size: 2.5rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        Customer Landing Page
+        Main dashboard for customers showing featured items and quick actions
+    -->
+    
+    <!-- Navigation Bar - KEEPING YOUR ORIGINAL -->
+    <nav class="navbar navbar-customer">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <span class="logo">🍽️</span>
+                <span>SUSL Canteen</span>
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link active">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="cart.html" class="nav-link cart-badge">
+                    🛒 Cart <span class="cart-count">0</span>
+                </a></li>
+                <li><a href="order-history.html" class="nav-link">My Orders</a></li>
+                <li id="userNav">
+                    <a href="login.html" class="nav-link">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section - UPDATED WITH TWO COLUMNS -->
+    <section class="hero hero-customer">
+        <div class="decorative-element"></div>
+        <div class="decorative-element"></div>
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-subtitle">Welcome to SUSL Forklet</p>
+                <h1 class="hero-title">Smart Dining Starts Here</h1>
+                <p class="hero-description">Smart campus canteen system designed to make food ordering faster, easier, and completely hassle-free. Whether you're a busy student or looking to order, we've made it easier to eat your meal.</p>
+                <a href="menu.html" class="btn-primary-orange">
+                    🍔 Get Started
+                </a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=600&fit=crop" alt="Delicious Food">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quick Actions Section - UPDATED -->
+    <section class="page-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Quick Actions</h2>
+            </div>
+            
+            <div class="menu-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <a href="menu.html" class="card text-center" style="text-decoration: none;">
+                    <div class="action-icon" style="margin-bottom: 1rem;">📋</div>
+                    <h3>View Menu</h3>
+                    <p style="color: #666; font-size: 0.95rem; margin: 0;">Browse all available items</p>
+                </a>
+                
+                <a href="cart.html" class="card text-center" style="text-decoration: none;">
+                    <div class="action-icon" style="margin-bottom: 1rem;">🛒</div>
+                    <h3>My Cart</h3>
+                    <p style="color: #666; font-size: 0.95rem; margin: 0;">Review and checkout</p>
+                </a>
+                
+                <a href="order-history.html" class="card text-center" style="text-decoration: none;">
+                    <div class="action-icon" style="margin-bottom: 1rem;">📦</div>
+                    <h3>My Orders</h3>
+                    <p style="color: #666; font-size: 0.95rem; margin: 0;">Track your orders</p>
+                </a>
+                
+                <a href="location.html" class="card text-center" style="text-decoration: none;">
+                    <div class="action-icon" style="margin-bottom: 1rem;">📍</div>
+                    <h3>Location</h3>
+                    <p style="color: #666; font-size: 0.95rem; margin: 0;">Find our canteen</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Items Section - UPDATED WITH CREAM BACKGROUND -->
+    <section class="popular-items-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">let's try Forklet</p>
+                <h2 class="section-title">🔥 Popular Items</h2>
+                <a href="menu.html" class="btn btn-customer-outline">View All</a>
+            </div>
+            
+            <div class="menu-grid" id="featuredItems">
+                <!-- Featured items will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works Section - UPDATED -->
+    <section class="page-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">let's try Forklet</p>
+                <h2 class="section-title">How Forklet Works</h2>
+            </div>
+            
+            <div class="menu-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div class="card step-card text-center">
+                    <div class="step-number">1</div>
+                    <h3>Browse Menu</h3>
+                    <p>Explore our delicious food items</p>
+                </div>
+                
+                <div class="card step-card text-center">
+                    <div class="step-number">2</div>
+                    <h3>Add to Cart</h3>
+                    <p>Select items and add to your cart</p>
+                </div>
+                
+                <div class="card step-card text-center">
+                    <div class="step-number">3</div>
+                    <h3>Place Order</h3>
+                    <p>Get your unique token number</p>
+                </div>
+                
+                <div class="card step-card text-center">
+                    <div class="step-number">4</div>
+                    <h3>Collect Food</h3>
+                    <p>Show token to collect your order</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer - KEEPING YOUR ORIGINAL -->
+    <footer style="background: var(--black); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">🍽️ SUSL Smart Digital Canteen System</p>
+            <p style="color: var(--gray); font-size: 0.875rem;">© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/cart.js"></script>
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update navigation based on login status
+            updateNavigation();
+            
+            // Load featured items (first 4 items)
+            loadFeaturedItems();
+            
+            // Update cart badge
+            updateCartBadge();
+        });
+        
+        /**
+         * Update navigation based on user login status
+         */
+        function updateNavigation() {
+            const currentUser = getCurrentUser();
+            const userNav = document.getElementById('userNav');
+            
+            if (currentUser && currentUser.role === USER_ROLES.CUSTOMER) {
+                userNav.innerHTML = `
+                    <div class="flex gap-sm" style="align-items: center;">
+                        <span class="nav-link">👤 <span class="user-name">${currentUser.name}</span></span>
+                        <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                    </div>
+                `;
+                setupLogoutButton();
+            }
+        }
+        
+        /**
+         * Load featured menu items
+         */
+        function loadFeaturedItems() {
+            const container = document.getElementById('featuredItems');
+            const items = getMenuItems(true).slice(0, 4);
+            
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <p>No items available at the moment</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = items.map(item => renderMenuItemCard(item)).join('');
+            
+            // Setup add to cart buttons
+            setupAddToCartButtons();
+        }
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

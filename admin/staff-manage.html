@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Management - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 
+        Admin Staff Management Page
+        Add, view, and manage staff members
+    -->
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-admin">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <span class="logo">👑</span>
+                <span>Admin Panel</span>
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link">Dashboard</a></li>
+                <li><a href="staff-manage.html" class="nav-link active">Staff</a></li>
+                <li><a href="location.html" class="nav-link">Location</a></li>
+                <li><a href="reports.html" class="nav-link">Reports</a></li>
+                <li>
+                    <span class="nav-link">👤 <span class="user-name">Admin</span></span>
+                </li>
+                <li>
+                    <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="hero hero-admin" style="padding: 2rem 0;">
+        <div class="container">
+            <h1 class="hero-title" style="font-size: 2rem;">Staff Management 👥</h1>
+            <p class="hero-subtitle" style="font-size: 1rem;">Add and manage your canteen staff</p>
+        </div>
+    </section>
+    
+    <!-- Staff Management Section -->
+    <section class="page-section">
+        <div class="container">
+            <!-- Action Bar -->
+            <div class="section-header">
+                <h2 class="section-title">All Staff Members</h2>
+                <button class="btn btn-admin-primary" onclick="openAddStaffModal()">
+                    ➕ Add Staff Member
+                </button>
+            </div>
+            
+            <!-- Staff List -->
+            <div id="staffListContainer">
+                <!-- Staff list will be loaded here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Add Staff Modal -->
+    <div class="modal-overlay" id="addStaffModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Staff Member</h2>
+                <button class="modal-close" onclick="closeModal('addStaffModal')">&times;</button>
+            </div>
+            
+            <form id="addStaffForm">
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" name="staffName" class="form-input admin-input" 
+                           placeholder="Enter full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email Address *</label>
+                    <input type="email" name="staffEmail" class="form-input admin-input" 
+                           placeholder="Enter email address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password *</label>
+                    <input type="password" name="staffPassword" class="form-input admin-input" 
+                           placeholder="Create a password" required minlength="6">
+                </div>
+                
+                <div class="alert alert-info">
+                    <small>The staff member will use these credentials to login to the staff portal.</small>
+                </div>
+                
+                <div class="flex gap-md mt-lg">
+                    <button type="button" class="btn btn-admin-outline" onclick="closeModal('addStaffModal')">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-admin-primary">
+                        ➕ Add Staff
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer style="background: var(--black); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">🍽️ SUSL Smart Digital Canteen - Admin Panel</p>
+            <p style="color: var(--gray); font-size: 0.875rem;">© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/orders.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check authentication
+            if (!protectPage(USER_ROLES.ADMIN)) return;
+            
+            // Update user name
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                document.querySelector('.user-name').textContent = currentUser.name;
+            }
+            
+            // Load staff list
+            renderStaffList('staffListContainer');
+            
+            // Setup forms
+            setupAddStaffForm();
+            setupModalHandlers();
+            setupLogoutButton();
+        });
+    </script>
+</body>
+</html>

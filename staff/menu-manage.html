@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Management - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 
+        Staff Menu Management Page
+        Add, edit, and manage menu items
+    -->
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-staff">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <span class="logo">👨‍🍳</span>
+                <span>Staff Portal</span>
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link">Dashboard</a></li>
+                <li><a href="dashboard.html" class="nav-link">Orders</a></li>
+                <li><a href="menu-manage.html" class="nav-link active">Menu</a></li>
+                <li>
+                    <span class="nav-link">👤 <span class="user-name">Staff</span></span>
+                </li>
+                <li>
+                    <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="hero hero-staff" style="padding: 2rem 0;">
+        <div class="container">
+            <h1 class="hero-title" style="font-size: 2rem;">Menu Management 🍔</h1>
+            <p class="hero-subtitle" style="font-size: 1rem;">Add, edit, and manage menu items</p>
+        </div>
+    </section>
+    
+    <!-- Menu Management Section -->
+    <section class="page-section">
+        <div class="container">
+            <!-- Action Bar -->
+            <div class="section-header">
+                <h2 class="section-title">All Menu Items</h2>
+                <button class="btn btn-staff-primary" onclick="openAddItemModal()">
+                    ➕ Add New Item
+                </button>
+            </div>
+            
+            <!-- Menu Items Table -->
+            <div id="menuTableContainer">
+                <!-- Menu table will be loaded here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Add Item Modal -->
+    <div class="modal-overlay" id="addItemModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Menu Item</h2>
+                <button class="modal-close" onclick="closeModal('addItemModal')">&times;</button>
+            </div>
+            
+            <form id="addItemForm">
+                <div class="form-group">
+                    <label class="form-label">Item Name *</label>
+                    <input type="text" name="itemName" class="form-input staff-input" 
+                           placeholder="Enter item name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea name="itemDescription" class="form-textarea" 
+                              placeholder="Enter item description"></textarea>
+                </div>
+                
+                <div class="flex gap-md">
+                    <div class="form-group" style="flex: 1;">
+                        <label class="form-label">Price (Rs.) *</label>
+                        <input type="number" name="itemPrice" class="form-input staff-input" 
+                               placeholder="0.00" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label class="form-label">Category *</label>
+                        <select name="itemCategory" class="form-select" required>
+                            <option value="">Select category</option>
+                            <option value="Rice">Rice</option>
+                            <option value="Kottu">Kottu</option>
+                            <option value="Burgers">Burgers</option>
+                            <option value="Submarines">Submarines</option>
+                            <option value="Seafood">Seafood</option>
+                            <option value="Snacks">Snacks</option>
+                            <option value="Beverages">Beverages</option>
+                            <option value="Desserts">Desserts</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Image URL</label>
+                    <input type="url" name="itemImage" class="form-input staff-input" 
+                           placeholder="https://example.com/image.jpg">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Preparation Time (minutes)</label>
+                    <input type="number" name="preparationTime" class="form-input staff-input" 
+                           placeholder="15" min="1" value="15">
+                </div>
+                
+                <div class="flex gap-md mt-lg">
+                    <button type="button" class="btn btn-staff-outline" onclick="closeModal('addItemModal')">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-staff-primary">
+                        ➕ Add Item
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Edit Item Modal -->
+    <div class="modal-overlay" id="editItemModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Menu Item</h2>
+                <button class="modal-close" onclick="closeModal('editItemModal')">&times;</button>
+            </div>
+            
+            <form id="editItemForm">
+                <input type="hidden" name="editItemId">
+                
+                <div class="form-group">
+                    <label class="form-label">Item Name *</label>
+                    <input type="text" name="editItemName" class="form-input staff-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea name="editItemDescription" class="form-textarea"></textarea>
+                </div>
+                
+                <div class="flex gap-md">
+                    <div class="form-group" style="flex: 1;">
+                        <label class="form-label">Price (Rs.) *</label>
+                        <input type="number" name="editItemPrice" class="form-input staff-input" 
+                               min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label class="form-label">Category *</label>
+                        <select name="editItemCategory" class="form-select" required>
+                            <option value="Rice">Rice</option>
+                            <option value="Kottu">Kottu</option>
+                            <option value="Burgers">Burgers</option>
+                            <option value="Submarines">Submarines</option>
+                            <option value="Seafood">Seafood</option>
+                            <option value="Snacks">Snacks</option>
+                            <option value="Beverages">Beverages</option>
+                            <option value="Desserts">Desserts</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Image URL</label>
+                    <input type="url" name="editItemImage" class="form-input staff-input">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Preparation Time (minutes)</label>
+                    <input type="number" name="editPreparationTime" class="form-input staff-input" min="1">
+                </div>
+                
+                <div class="flex gap-md mt-lg">
+                    <button type="button" class="btn btn-staff-outline" onclick="closeModal('editItemModal')">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-staff-primary">
+                        💾 Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer style="background: var(--black); color: white; padding: 2rem 0; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 0.5rem;">🍽️ SUSL Smart Digital Canteen - Staff Portal</p>
+            <p style="color: var(--gray); font-size: 0.875rem;">© 2026 All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/staff.js"></script>
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize menu management (checks auth)
+            initMenuManagement();
+            
+            // Update user name
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                document.querySelector('.user-name').textContent = currentUser.name;
+            }
+        });
+    </script>
+</body>
+</html>
