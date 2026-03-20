@@ -1,0 +1,2052 @@
+/**
+ * SUSL Forklet - Customer Pages Stylesheet
+ * 
+ * This is the centralized stylesheet for all customer pages (landing, menu, cart, order-history, location)
+ * It contains:
+ * - Customer theme colors and CSS variables
+ * - Customer navbar styling with black background and white text
+ * - Hero section and section styling
+ * - All card styles (item-card, benefit-card, action-card, location-card)
+ * - Button styles with ripple effects
+ * - Cart and order management styles
+ * - Menu and product display styles
+ * - All animations and transitions (fadeInUp, slideInLeft, slideInRight, scaleIn, float, pulse)
+ * - Comprehensive responsive design for all breakpoints
+ * - Print styles
+ * 
+ * CONSOLIDATION NOTE: All inline styles from landing.html have been removed and replaced with
+ * semantic CSS classes defined in this file. This file serves as the single source of truth
+ * for all customer page styling, ensuring consistency across landing.html, menu.html, cart.html,
+ * order-history.html, and location.html.
+ */
+
+/* ============================================
+   CUSTOMER THEME VARIABLES & COLORS
+   ============================================ */
+:root {
+    /* Primary Color - Orange */
+    --customer-primary: #cd5f08;
+    --customer-primary-dark: #a34d06;
+    --customer-primary-light: #ffe4c4;
+    
+    /* Secondary Colors */
+    --customer-accent: #FF9800;
+    --customer-black: #000000;
+    --customer-white: #ffffff;
+    --customer-dark-gray: #2d2d2d;
+    --customer-gray: #999999;
+    --customer-light-gray: #f5f5f5;
+    --customer-border-gray: #e0e0e0;
+    
+    /* Success/Status Colors */
+    --customer-success: #4CAF50;
+    --customer-error: #f44336;
+    
+    /* Font */
+    --customer-font-family: 'Poppins', sans-serif;
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+
+/* Fade in and slide up animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Simple fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Slide in from left animation */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide in from right animation */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide down animation (navbar) */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scale in animation for cards */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Float animation for decorative elements */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Pulse animation for decorative circles */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.2;
+    }
+}
+
+/* ============================================
+   GLOBAL CUSTOMER STYLES
+   ============================================ */
+
+body {
+    font-family: var(--customer-font-family);
+}
+
+/* ============================================
+   CUSTOMER NAVBAR STYLING
+   ============================================ */
+
+/* Black navbar background for all customer pages */
+/* ============================================
+   NAVBAR - FIXED/STICKY AT TOP
+   ============================================ */
+
+.navbar,
+.navbar-customer {
+    background-color: var(--customer-white) !important;
+    animation: slideInDown 0.6s ease-out;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 999 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem 0 !important;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Add padding to body to prevent content from hiding under fixed navbar */
+body {
+    padding-top: 70px;
+}
+
+/* Adjust body padding for different screen sizes */
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 55px;
+    }
+}
+
+/* Black navbar brand for white background */
+.navbar-brand {
+    color: var(--customer-black) !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+/* White navbar brand image */
+.navbar-brand img {
+    height: 50px;
+    width: auto;
+}
+
+/* Black navbar toggle button */
+.navbar-toggle {
+    color: var(--customer-black) !important;
+}
+
+/* Black navigation links */
+.nav-link {
+    color: var(--customer-black) !important;
+}
+
+/* Orange hover state for nav links */
+.nav-link:hover {
+    color: var(--customer-primary) !important;
+}
+
+/* Orange active state for nav links */
+.nav-link.active {
+    color: var(--customer-primary) !important;
+}
+
+/* Cart badge styling */
+.cart-badge {
+    position: relative;
+}
+
+.cart-count {
+    background-color: var(--customer-primary);
+    color: var(--customer-white);
+    border-radius: 50%;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-left: 0.25rem;
+}
+
+/* Navbar container layout */
+.navbar .container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+/* Mobile navigation dropdown styling */
+@media (max-width: 768px) {
+    .navbar,
+    .navbar-customer {
+        padding: 0.5rem 0 !important;
+        background-color: var(--customer-white) !important;
+    }
+
+    .navbar-nav {
+        background-color: var(--customer-white) !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        transition: max-height 0.3s ease-in-out !important;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .navbar-nav.active {
+        max-height: 500px !important;
+    }
+
+    .navbar-nav .nav-link {
+        color: var(--customer-black) !important;
+        border-bottom: 1px solid #f0f0f0 !important;
+        padding: 0.75rem 1rem !important;
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: var(--customer-primary) !important;
+        background-color: #f5f5f5 !important;
+    }
+}
+
+/* Desktop navigation display */
+@media (min-width: 769px) {
+    .navbar-nav {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+    }
+
+    .navbar-nav li {
+        display: inline-block !important;
+    }
+
+    .navbar-toggle {
+        display: none !important;
+    }
+}
+
+
+/* ============================================
+   HERO SECTION STYLING
+   ============================================ */
+
+/* Hero section with background image and overlay */
+.hero-section {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hero section grid layout */
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+/* Hero section left content */
+.hero-content {
+    z-index: 2;
+    position: relative;
+}
+
+/* Hero section image with animation */
+.hero-image-hover {
+    width: 100%;
+    height: auto;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideInRight 1s ease-out forwards;
+}
+
+.hero-image-hover:hover {
+    opacity: 1;
+    transform: scale(1.05) rotate(1deg);
+}
+
+/* Hero title styling */
+.hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--customer-dark-gray);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    animation: slideInLeft 1s ease-out forwards;
+}
+
+/* Hero subtitle */
+.hero-subtitle {
+    font-size: 1.125rem;
+    color: var(--customer-gray);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    animation: slideInLeft 1.2s ease-out forwards;
+}
+
+/* Decorative circular elements in hero */
+.hero-pulse {
+    animation: pulse 4s ease-in-out infinite;
+}
+
+.hero-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Hero button styling */
+.btn-hero-hover {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    animation: slideInLeft 1.4s ease-out forwards;
+}
+
+.btn-hero-hover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-hero-hover:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-hero-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ============================================
+   PAGE HEADER STYLING
+   ============================================ */
+
+/* Centered page header */
+.page-header {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 1rem 1rem;
+    background: linear-gradient(135deg, #cd5f08 0%, #a34d06 50%, #8b3a05 100%);
+    border-radius: 0;
+    box-shadow: 0 8px 32px rgba(205, 95, 8, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
+    pointer-events: none;
+}
+
+/* Page header title */
+.page-header-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--customer-white);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Page header subtitle with decorative lines */
+.page-header-subtitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Decorative white lines */
+.page-header-line {
+    width: 60px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* ============================================
+   GENERAL SECTIONS & CONTAINERS
+   ============================================ */
+
+/* Standard customer page section */
+.customer-section {
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #f0f3f7 50%, #e8f1f8 100%);
+    min-height: calc(100vh - 400px);
+    position: relative;
+}
+
+.customer-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(205, 95, 8, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(205, 95, 8, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.customer-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Customer container max-width */
+.customer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Section title styling */
+.customer-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--customer-dark-gray);
+    margin-bottom: 1rem;
+}
+
+/* Section subtitle */
+.customer-subtitle {
+    font-size: 1.125rem;
+    color: var(--customer-gray);
+    margin-bottom: 2rem;
+}
+
+/* ============================================
+   FOOTER STYLING
+   ============================================ */
+
+/* Consistent footer for all customer pages */
+footer,
+.page-footer {
+    background: gray;
+    color: var(--customer-white);
+    padding: 2rem 0;
+    text-align: center;
+    margin-top: 2rem;
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Footer paragraph spacing */
+footer p,
+.page-footer p {
+    margin-bottom: 0.5rem;
+}
+
+/* Copyright text styling */
+footer .copyright,
+.page-footer-copyright {
+    color: #999;
+    font-size: 0.875rem;
+}
+
+/* ============================================
+   BUTTONS - ALL VARIANTS
+   ============================================ */
+
+/* Customer primary button - orange */
+.btn-customer-primary,
+.btn-primary {
+    background: var(--customer-primary);
+    color: var(--customer-white);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+/* Hover state for customer buttons */
+.btn-customer-primary:hover,
+.btn-primary:hover {
+    background: var(--customer-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(205, 95, 8, 0.3);
+}
+
+/* Large customer button variant */
+.btn-customer-primary.btn-lg,
+.btn-primary.btn-lg {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+}
+
+/* Add to cart button - with ripple effect */
+.btn-add-cart {
+    background: var(--customer-primary);
+    color: var(--customer-white);
+    border: none;
+    padding: 0.45rem 1rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add to cart hover state */
+.btn-add-cart:hover {
+    background: var(--customer-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(205, 95, 8, 0.3);
+}
+
+/* Ripple effect for add to cart button */
+.btn-add-cart::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-add-cart:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Add to cart button (menu.js class) */
+.add-to-cart-btn {
+    border-radius: 25px;
+    background: var(--customer-primary);
+    color: var(--customer-white);
+    border: none;
+    padding: 0.45rem 1rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.add-to-cart-btn:hover {
+    background: var(--customer-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(205, 95, 8, 0.3);
+}
+
+.add-to-cart-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================
+   CARDS - ITEM CARDS (Menu, Food, Products)
+   ============================================ */
+
+/* Individual menu/food/item card */
+.item-card,
+.food-card {
+    background: var(--customer-white);
+    width: 100%;          /* was 250px — remove the fixed width */
+    max-width: 280px;     /* optional upper cap */
+    height: auto;         /* let height grow with content */
+    min-height: 400px
+}
+
+/* Hover effect for item/food cards */
+.item-card:hover,
+.food-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 45px rgba(205, 95, 8, 0.25);
+}
+
+/* Item/food card image */
+.item-image,
+.food-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    background-color: var(--customer-light-gray);
+    transition: transform 0.5s ease;
+}
+
+/* Scale image on card hover */
+.item-card:hover .item-image,
+.food-card:hover .food-image {
+    transform: scale(1.1);
+}
+
+/* Item/food card content container */
+.item-content,
+.food-content {
+    padding: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Item/food category label - orange */
+.item-category,
+.food-category {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--customer-primary), #e85b00);
+    color: var(--customer-white);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.8rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 25px;
+    box-shadow: 0 3px 10px rgba(205, 95, 8, 0.2);
+}
+
+/* Item/food name */
+.item-name,
+.food-name {
+    background: linear-gradient(135deg, var(--customer-dark-gray), #1a1a1a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+}
+
+/* Item/food description */
+.item-description,
+.food-description {
+    color: var(--customer-gray);
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.3px;
+    max-width: 100%;
+}
+
+/* Item/food card footer with price and button */
+.item-footer,
+.food-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-top: 2px solid #f0f0f0;
+    padding-top: 1rem;
+}
+
+/* Quantity selector styling */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem;
+    background: var(--customer-light-gray);
+    border-radius: 20px;
+    width: 100%;
+    margin: 0.6rem 0;
+}
+
+/* Quantity button */
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: var(--customer-white);
+    color: var(--customer-primary);
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.qty-btn:hover {
+    background: var(--customer-primary);
+    color: var(--customer-white);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(205, 95, 8, 0.2);
+}
+
+.qty-btn:active {
+    transform: scale(0.95);
+}
+
+.qty-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #ddd;
+    color: #999;
+}
+
+/* Quantity display value */
+.qty-display {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--customer-dark-gray);
+    min-width: 35px;
+    text-align: center;
+    user-select: none;
+}
+
+/* Item/food price - orange */
+.item-price,
+.food-price {
+    color: var(--customer-primary);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+}
+
+/* ============================================
+   CARDS - BENEFIT CARDS (Features/Benefits)
+   ============================================ */
+
+/* Benefit/feature card */
+.benefit-card {
+    background: var(--customer-white);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(205, 95, 8, 0.2);
+}
+
+/* Benefit card title */
+.benefit-card h3 {
+    color: var(--customer-dark-gray);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* Benefit card description */
+.benefit-card p {
+    color: var(--customer-gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ============================================
+   CARDS - ACTION CARDS (CTA Cards)
+   ============================================ */
+
+/* Action card with hover effects */
+.action-card-hover {
+    background: var(--customer-white);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.action-card-hover:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(205, 95, 8, 0.25) !important;
+}
+
+/* Action card title */
+.action-card-hover h3 {
+    color: var(--customer-dark-gray);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* Action card description */
+.action-card-hover p {
+    color: var(--customer-gray);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* ============================================
+   CARDS - LOCATION CARDS (Location/Branch Cards)
+   ============================================ */
+
+/* Location card with background image overlay */
+.location-card {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    min-height: 250px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* White overlay on location card */
+.location-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(0.01px);
+    z-index: 1;
+}
+
+/* Location card content above overlay */
+.location-card-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Scale content on location card hover */
+.location-card:hover .location-card-content div {
+    transform: scale(1.1);
+}
+
+/* Location card hover effect */
+.location-card:hover {
+    transform: scale(1.05) translateY(-15px) rotate(-1deg);
+    box-shadow: 0 25px 50px rgba(205, 95, 8, 0.35);
+}
+
+/* Location card title */
+.location-card h3 {
+    color: var(--customer-dark-gray);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* Location card description */
+.location-card p {
+    color: var(--customer-gray);
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   CARDS - STEP CIRCLES (How It Works Steps)
+   ============================================ */
+
+/* Step circle container */
+.step-circle {
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Step circle wrapper */
+.step-circle .circle-wrapper {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background-color: var(--customer-light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 5px 15px rgba(205, 95, 8, 0.1);
+}
+
+/* Step circle hover effect */
+.step-circle .circle-wrapper:hover {
+    transform: scale(1.08) translateY(-10px);
+    box-shadow: 0 20px 40px rgba(205, 95, 8, 0.3);
+}
+
+/* Scale image inside step circle on hover */
+.step-circle .circle-wrapper:hover img {
+    transform: scale(1.1);
+}
+
+/* Step circle image */
+.step-circle .circle-wrapper img {
+    width: 80%;
+    height: auto;
+    transition: transform 0.5s ease;
+}
+
+/* Step circle title */
+.step-circle h3 {
+    color: var(--customer-dark-gray);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s;
+}
+
+.step-circle:hover h3 {
+    color: var(--customer-primary-dark);
+}
+
+/* Step circle description */
+.step-circle p {
+    color: var(--customer-gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Step number styling */
+.step-number-gradient {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--customer-primary), var(--customer-primary-dark));
+    color: var(--customer-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 5px 15px rgba(205, 95, 8, 0.3);
+}
+
+/* ============================================
+   CART PAGE STYLES
+   ============================================ */
+
+/* Menu/Food grid layout - Responsive */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 1fr); /* 4 cards on large screens */
+    gap: 1rem; /* smaller spacing for density */
+    padding: 2rem 1rem;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Tablet screens: 768px - 1023px */
+@media (max-width: 1023px) {
+    .menu-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 3 cards per row */
+        gap: 0.9rem; /* smaller gap for tablets */
+        padding: 1.5rem 1rem;
+    }
+}
+
+/* Mobile screens: below 768px */
+@media (max-width: 767px) {
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+        gap: 0.75rem; /* smaller gap for mobile */
+        padding: 1rem 0.5rem;
+    }
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Food/Item card enhanced hover effect */
+.food-card:hover,
+.item-card:hover {
+    box-shadow: 0 25px 60px rgba(205, 95, 8, 0.3) !important;
+    border: 1px solid rgba(205, 95, 8, 0.1);
+}
+
+/* Cart container */
+.cart-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Individual cart item */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--customer-white);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Cart item image */
+.cart-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    background-color: var(--customer-light-gray);
+}
+
+/* Cart item information */
+.cart-item-info {
+    flex: 1;
+}
+
+/* Cart item name */
+.cart-item-name {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--customer-dark-gray);
+}
+
+/* Cart item price */
+.cart-item-price {
+    color: var(--customer-primary);
+    font-weight: 500;
+}
+
+/* Cart quantity controls */
+.cart-quantity {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Quantity button */
+.quantity-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--customer-light-gray);
+    border: none;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Quantity button hover */
+.quantity-btn:hover {
+    background-color: var(--customer-primary-light);
+}
+
+/* Quantity value display */
+.quantity-value {
+    font-weight: 600;
+    min-width: 30px;
+    text-align: center;
+}
+
+/* Remove item button */
+.cart-item-remove {
+    color: var(--customer-error);
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+/* Cart summary section */
+.cart-summary {
+    background: var(--customer-white);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Cart summary row */
+.cart-summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+/* Cart summary total row */
+.cart-summary-row.total {
+    border-top: 2px solid var(--customer-border-gray);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--customer-primary);
+}
+
+/* ============================================
+   ORDER STATUS & TOKEN STYLES
+   ============================================ */
+
+/* Token display box */
+.token-display {
+    background: linear-gradient(135deg, var(--customer-primary) 0%, var(--customer-primary-dark) 100%);
+    color: var(--customer-white);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Token number display */
+.token-number {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 1rem 0;
+    letter-spacing: 4px;
+}
+
+/* Token label */
+.token-label {
+    font-size: 0.875rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+}
+
+/* Order status display */
+.order-status {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+/* Status step */
+.status-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Status icon */
+.status-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--customer-light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.3s;
+}
+
+/* Active status icon */
+.status-step.active .status-icon {
+    background-color: var(--customer-primary);
+    color: var(--customer-white);
+}
+
+/* Completed status icon */
+.status-step.completed .status-icon {
+    background-color: var(--customer-success);
+    color: var(--customer-white);
+}
+
+/* Status label */
+.status-label {
+    font-size: 0.875rem;
+    color: var(--customer-gray);
+}
+
+/* Active/completed status label */
+.status-step.active .status-label,
+.status-step.completed .status-label {
+    color: var(--customer-dark-gray);
+    font-weight: 500;
+}
+
+/* Status line connecting steps */
+.status-line {
+    flex: 1;
+    height: 3px;
+    background-color: var(--customer-light-gray);
+    align-self: center;
+    margin-top: -25px;
+}
+
+/* Active status line */
+.status-line.active {
+    background-color: var(--customer-primary);
+}
+
+/* ============================================
+   ORDER HISTORY STYLES
+   ============================================ */
+
+/* Order history item */
+.history-item {
+    background: var(--customer-white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Order history header */
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--customer-border-gray);
+}
+
+/* Order token in history */
+.history-token {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--customer-primary);
+}
+
+/* Order date */
+.history-date {
+    color: var(--customer-gray);
+    font-size: 0.875rem;
+}
+
+/* Order items list */
+.history-items {
+    margin-bottom: 1rem;
+}
+
+/* Individual order item in history */
+.history-item-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    color: var(--customer-dark-gray);
+}
+
+/* Order item name */
+.history-item-name {
+    flex: 1;
+}
+
+/* Order item quantity */
+.history-item-qty {
+    margin: 0 1rem;
+}
+
+/* Order item price */
+.history-item-price {
+    font-weight: 600;
+    color: var(--customer-primary);
+}
+
+/* Order total */
+.history-total {
+    text-align: right;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--customer-primary);
+}
+
+/* ============================================
+   SEARCH & FILTER STYLES
+   ============================================ */
+
+/* Search bar container */
+.search-bar {
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+    margin: 0 auto 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Search input field */
+.search-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem 1.5rem 1rem 3.5rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    font-size: 1.05rem;
+    font-family: inherit;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    background: var(--customer-white);
+    color: var(--customer-dark-gray);
+}
+
+.search-input::placeholder {
+    color: #999;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* Search input focus state */
+.search-input:focus {
+    outline: none;
+    border-color: var(--customer-primary);
+    box-shadow: 0 8px 25px rgba(205, 95, 8, 0.15);
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--customer-white) 0%, rgba(205, 95, 8, 0.02) 100%);
+}
+
+/* Search icon */
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--customer-primary);
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+/* Category filter buttons */
+.category-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    position: sticky;
+    top: 70px;
+    background: transparent;
+    padding: 1rem 0;
+    z-index: 50;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+/* Add wrapper style for better sticky positioning */
+.category-filters-wrapper {
+    position: sticky;
+    top: 70px;
+    background: white;
+    z-index: 50;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+    width: 100%;
+    border-radius: 50px;
+}
+
+.category-filters-wrapper .category-filters {
+    position: static;
+    top: auto;
+    background: transparent;
+    padding: 0;
+    z-index: auto;
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+/* Individual category button */
+.category-btn {
+    padding: 0.75rem 1.5rem;
+    background: var(--customer-white);
+    border: 2px solid #e8e8e8;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--customer-gray);
+    font-size: 0.95rem;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.category-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+    pointer-events: none;
+}
+
+.category-btn:hover::before {
+    left: 100%;
+}
+
+/* Category button hover */
+.category-btn:hover {
+    border-color: var(--customer-primary);
+    color: var(--customer-primary);
+    box-shadow: 0 6px 20px rgba(205, 95, 8, 0.15);
+    transform: translateY(-3px);
+}
+
+/* Active category button */
+.category-btn.active {
+    background: linear-gradient(135deg, var(--customer-primary), #e85b00);
+    border-color: transparent;
+    color: var(--customer-white);
+    box-shadow: 0 8px 25px rgba(205, 95, 8, 0.25);
+    font-weight: 700;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   EMPTY STATE STYLES
+   ============================================ */
+
+/* Empty state container */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--customer-gray);
+}
+
+/* Empty state icon */
+.empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* Empty state title */
+.empty-state-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--customer-dark-gray);
+}
+
+/* Empty state text */
+.empty-state-text {
+    margin-bottom: 2rem;
+}
+
+/* ============================================
+   ANIMATION APPLICATION CLASSES
+   ============================================ */
+
+/* Initial state - elements hidden before scroll */
+.animate-on-scroll {
+    opacity: 0;
+}
+
+/* Apply animations only when visible */
+.animate-visible {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Hero section animations */
+.hero-grid > div:first-child.animate-visible {
+    animation: slideInLeft 1s ease-out forwards;
+}
+
+.hero-grid > div:last-child.animate-visible {
+    animation: slideInRight 1s ease-out forwards;
+}
+
+/* Section headers animation */
+section h2.animate-visible,
+section h3.animate-visible {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+section p[style*="text-transform: uppercase"].animate-visible {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Cards animation with staggered delay */
+.benefit-card.animate-visible {
+    animation: scaleIn 0.6s ease-out forwards;
+}
+
+.benefit-card.animate-visible:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.benefit-card.animate-visible:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+/* Action cards animation */
+.action-card-hover.animate-visible {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.action-card-hover.animate-visible:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.action-card-hover.animate-visible:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.action-card-hover.animate-visible:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.action-card-hover.animate-visible:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+/* Item cards animation */
+.item-card.animate-visible {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.item-card.animate-visible:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.item-card.animate-visible:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.item-card.animate-visible:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* Step circles animation */
+.step-circle.animate-visible {
+    animation: scaleIn 0.8s ease-out forwards;
+}
+
+.step-circle.animate-visible:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.step-circle.animate-visible:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.step-circle.animate-visible:nth-child(5) {
+    animation-delay: 0.6s;
+}
+
+.step-circle.animate-visible:nth-child(7) {
+    animation-delay: 0.8s;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - TABLET & ABOVE
+   ============================================ */
+
+@media (max-width: 1200px) {
+    .step-circle .circle-wrapper {
+        width: 200px !important;
+        height: 200px !important;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+}
+
+
+/* ============================================
+   RESPONSIVE DESIGN - TABLET
+   ============================================ */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .step-circle .circle-wrapper {
+        width: 200px !important;
+        height: 200px !important;
+    }
+}
+
+@media (max-width: 968px) {
+    .hero-grid {
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+    }
+
+    .hero-title {
+        font-size: 2.5rem !important;
+    }
+
+    /* Stack two-column sections on tablet */
+    section > div > div[style*="grid-template-columns: repeat(2, 1fr)"],
+    section > div > div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Make circles stack on tablet */
+    section > div > div[style*="display: flex; justify-content: center"] {
+        flex-wrap: wrap !important;
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE
+   ============================================ */
+
+@media (max-width: 767px) {
+    /* Mobile: 1 card per row */
+    .menu-grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+        padding: 1rem 0.5rem;
+    }
+
+    /* Stack cart items on mobile */
+    .cart-item {
+        flex-wrap: wrap;
+    }
+
+    .cart-item-image {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* Stack order status on mobile */
+    .order-status {
+        flex-direction: column;
+    }
+
+    .status-line {
+        display: none;
+    }
+
+    /* Menu item adjustments */
+    .food-image,
+    .item-image {
+        height: 120px;
+    }
+
+    .food-content,
+    .item-content {
+        padding: 1rem;
+    }
+
+    /* Search bar adjustments */
+    .search-bar {
+        min-width: 100%;
+    }
+
+    .search-input {
+        max-width: 100%;
+        padding: 0.9rem 1.2rem 0.9rem 3rem;
+        font-size: 1rem;
+    }
+
+    /* Category filters adjustments */
+    .category-filters {
+        justify-content: center;
+        top: 60px;
+        padding: 0.75rem 0;
+        gap: 0.5rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .category-filters-wrapper {
+        top: 60px;
+        padding: 0.75rem 0;
+    }
+
+    .category-btn {
+        padding: 0.65rem 1.2rem;
+        font-size: 0.9rem;
+        border-radius: 20px;
+    }
+
+    /* Page header adjustments */
+    .page-header {
+        padding: 3rem 2rem;
+    }
+
+    .page-header-title {
+        font-size: 2.5rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .page-header-subtitle {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .page-header-line {
+        width: 40px;
+    }
+
+    /* Hero section on mobile */
+    .hero-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .hero-title {
+        font-size: 1.75rem;
+    }
+
+    /* Navbar adjustments for mobile */
+    .navbar-nav {
+        background-color: var(--customer-black) !important;
+    }
+
+    .navbar-nav .nav-link {
+        color: var(--customer-white) !important;
+        border-bottom: 1px solid #333 !important;
+    }
+
+    /* Card adjustments */
+    .benefit-card {
+        padding: 1.5rem;
+    }
+
+    .action-card-hover {
+        padding: 1.5rem;
+    }
+
+    /* Hide connecting lines on small mobile screens */
+    @media (max-width: 640px) {
+        section > div > div[style*="display: flex; justify-content: center"] > div[style*="width: 60px"] {
+            display: none !important;
+        }
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - SMALL MOBILE
+   ============================================ */
+
+@media (max-width: 480px) {
+    /* Very small screens - single column */
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Category filters on very small screens */
+    .category-filters {
+        top: 55px;
+        padding: 0.5rem 0;
+        gap: 0.25rem;
+    }
+
+    .category-filters-wrapper {
+        top: 55px;
+        padding: 0.5rem 0;
+    }
+
+    .category-btn {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.75rem;
+    }
+
+    /* Food card adjustments */
+    .food-image,
+    .item-image {
+        height: 150px;
+    }
+
+    .food-content,
+    .item-content {
+        padding: 0.75rem;
+    }
+
+    .food-name,
+    .item-name {
+        font-size: 1.25rem;
+    }
+
+    .food-price,
+    .item-price {
+        font-size: 1.25rem;
+    }
+
+    /* Token size for small screens */
+    .token-number {
+        font-size: 2rem;
+    }
+
+    /* Cart item on small screens */
+    .cart-quantity {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+
+    /* Button sizing */
+    .btn-add-cart {
+        width: 100%;
+    }
+
+    /* Page header for small screens */
+    .page-header-title {
+        font-size: 1.5rem;
+    }
+
+    .page-header-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .page-header-line {
+        width: 30px;
+    }
+
+    /* Footer adjustments */
+    footer,
+    .page-footer {
+        padding: 1.5rem 0;
+    }
+
+    /* Hero section adjustments */
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    /* Card adjustments */
+    .step-circle .circle-wrapper {
+        width: 150px !important;
+        height: 150px !important;
+    }
+
+    .step-number-gradient {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
+
+
+/* ============================================
+   SCROLL TO TOP BUTTON
+   ============================================ */
+
+#scrollTopBtn {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--customer-primary);
+    color: var(--customer-white);
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    display: none;
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    font-weight: 700;
+    align-items: center;
+    justify-content: center;
+}
+
+#scrollTopBtn:hover {
+    background-color: var(--customer-primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+#scrollTopBtn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Show button when page is scrolled */
+#scrollTopBtn.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* Mobile adjustments for scroll-to-top button */
+@media (max-width: 768px) {
+    #scrollTopBtn {
+        width: 45px;
+        height: 45px;
+        right: 15px;
+        bottom: 15px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #scrollTopBtn {
+        width: 40px;
+        height: 40px;
+        right: 10px;
+        bottom: 10px;
+        font-size: 18px;
+    }
+}
+
+/* Ensure scroll-to-top button hidden in print */
+@media print {
+    #scrollTopBtn {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+    /* Hide interactive elements when printing */
+    .navbar,
+    .navbar-customer,
+    .navbar-toggle,
+    .nav-link,
+    .btn-add-cart,
+    .btn-customer-primary,
+    .search-bar,
+    .category-filters,
+    footer,
+    .page-footer {
+        display: none !important;
+    }
+
+    /* Simplify card styling for print */
+    .food-card,
+    .item-card,
+    .history-item,
+    .cart-item {
+        width: 100px;
+        box-shadow: none;
+        border: 1px solid var(--customer-border-gray);
+        page-break-inside: avoid;
+    }
+
+    /* Token display styling for print */
+    .token-display {
+        background: var(--customer-white);
+        color: var(--customer-dark-gray);
+        border: 2px solid var(--customer-border-gray);
+    }
+
+    /* Simplify button styling */
+    a[style*="background: #cd5f08"],
+    a[style*="background-color: #cd5f08"] {
+        border: 1px solid var(--customer-border-gray);
+        background: var(--customer-white) !important;
+        color: var(--customer-dark-gray) !important;
+    }
+}

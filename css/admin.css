@@ -1,0 +1,648 @@
+/**
+ * SUSL Forklet - Admin Pages Stylesheet
+ * 
+ * This file contains all admin-specific CSS including:
+ * - Admin theme colors and variables
+ * - Admin navbar styling
+ * - Dashboard and analytics styles
+ * - Admin buttons and components
+ * - Staff management styles
+ * - Reports and data tables
+ * - Responsive design for admin pages
+ */
+
+/* ============================================
+   ADMIN THEME VARIABLES
+   ============================================ */
+:root {
+    /* Admin Theme - Purple Primary */
+    --admin-primary: #9C27B0;
+    --admin-primary-dark: #7B1FA2;
+    --admin-primary-light: #E1BEE7;
+    --admin-accent: #FFC107;
+}
+
+/* ============================================
+   ADMIN NAVBAR STYLING
+   ============================================ */
+
+/* Purple navbar brand for admin pages */
+.navbar-admin .navbar-brand {
+    color: var(--admin-primary) !important;
+}
+
+/* Purple navigation links hover state */
+.navbar-admin .nav-link:hover {
+    color: var(--admin-primary) !important;
+}
+
+/* Purple active navigation links */
+.navbar-admin .nav-link.active {
+    color: var(--admin-primary) !important;
+}
+
+/* ============================================
+   ADMIN BUTTONS
+   ============================================ */
+
+/* Admin primary button - purple */
+.btn-admin-primary {
+    background-color: var(--admin-primary);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+/* Hover state for admin buttons */
+.btn-admin-primary:hover {
+    background-color: var(--admin-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(156, 39, 176, 0.3);
+}
+
+/* Admin outline button */
+.btn-admin-outline {
+    background-color: transparent;
+    color: var(--admin-primary);
+    border: 2px solid var(--admin-primary);
+    padding: 0.65rem 1.8rem;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+/* Hover state for outline buttons */
+.btn-admin-outline:hover {
+    background-color: var(--admin-primary);
+    color: var(--white);
+}
+
+/* ============================================
+   ADMIN DASHBOARD STYLES
+   ============================================ */
+
+/* Dashboard statistics grid */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Statistics card */
+.stat-card {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+/* Admin stat card with purple top border */
+.stat-card.admin {
+    border-top: 4px solid var(--admin-primary);
+}
+
+/* Large stat number */
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: var(--admin-primary);
+}
+
+/* Stat label */
+.stat-label {
+    color: #616161;
+    font-size: 0.875rem;
+}
+
+/* ============================================
+   STAFF MANAGEMENT
+   ============================================ */
+
+/* Staff grid layout */
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Staff card */
+.staff-card {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    text-align: center;
+    transition: all 0.3s;
+}
+
+/* Staff card hover */
+.staff-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(156, 39, 176, 0.15);
+}
+
+/* Staff avatar */
+.staff-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--admin-primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 1rem;
+    color: var(--admin-primary);
+}
+
+/* Staff name */
+.staff-name {
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+    color: #2d2d2d;
+}
+
+/* Staff email */
+.staff-email {
+    color: #616161;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+/* Staff stats */
+.staff-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+/* Individual staff stat */
+.staff-stat {
+    text-align: center;
+}
+
+/* Staff stat value */
+.staff-stat-value {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--admin-primary);
+}
+
+/* Staff stat label */
+.staff-stat-label {
+    font-size: 0.875rem;
+    color: #616161;
+}
+
+/* Staff card actions */
+.staff-card-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* ============================================
+   ADMIN REPORTS & DATA TABLES
+   ============================================ */
+
+/* Admin data table */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+/* Table header */
+.admin-table thead {
+    background-color: var(--admin-primary);
+    color: white;
+}
+
+/* Table header cell */
+.admin-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+/* Table body cell */
+.admin-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Table row hover */
+.admin-table tbody tr:hover {
+    background-color: var(--admin-primary-light);
+}
+
+/* Table actions cell */
+.table-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Table action button */
+.table-action-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+/* Edit button in table */
+.table-action-btn.edit {
+    background-color: var(--admin-primary);
+    color: white;
+}
+
+.table-action-btn.edit:hover {
+    background-color: var(--admin-primary-dark);
+}
+
+/* Delete button in table */
+.table-action-btn.delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.table-action-btn.delete:hover {
+    background-color: #d32f2f;
+}
+
+/* View button in table */
+.table-action-btn.view {
+    background-color: #2196F3;
+    color: white;
+}
+
+.table-action-btn.view:hover {
+    background-color: #1976D2;
+}
+
+/* ============================================
+   ADMIN LOCATION MANAGEMENT
+   ============================================ */
+
+/* Location management grid */
+.location-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Location card */
+.location-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s;
+}
+
+/* Location card hover */
+.location-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(156, 39, 176, 0.15);
+}
+
+/* Location card header */
+.location-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--admin-primary-light);
+}
+
+/* Location card icon */
+.location-card-icon {
+    font-size: 2rem;
+    color: var(--admin-primary);
+}
+
+/* Location name */
+.location-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #2d2d2d;
+}
+
+/* Location address */
+.location-address {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+/* Location info */
+.location-info {
+    font-size: 0.875rem;
+    color: #999;
+    margin-bottom: 0.5rem;
+}
+
+/* ============================================
+   ADMIN FORM STYLES
+   ============================================ */
+
+/* Admin input focus state - purple */
+.form-input.admin-input:focus {
+    border-color: var(--admin-primary);
+    box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.1);
+}
+
+/* Admin form group */
+.form-group.admin-form {
+    margin-bottom: 1.5rem;
+}
+
+/* ============================================
+   ADMIN DASHBOARD LAYOUT
+   ============================================ */
+
+/* Dashboard main container */
+.dashboard-container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Dashboard section title */
+.dashboard-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d2d2d;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Dashboard section title icon */
+.dashboard-title-icon {
+    color: var(--admin-primary);
+    font-size: 2rem;
+}
+
+/* Dashboard section */
+.dashboard-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    margin-bottom: 2rem;
+}
+
+/* Dashboard section title */
+.dashboard-section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d2d2d;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--admin-primary-light);
+}
+
+/* ============================================
+   ADMIN MODALS & DIALOGS
+   ============================================ */
+
+/* Admin modal */
+.admin-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* Modal content */
+.admin-modal-content {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 5rem auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal header */
+.admin-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--admin-primary-light);
+}
+
+/* Modal title */
+.admin-modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d2d2d;
+}
+
+/* Close button */
+.admin-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.3s;
+}
+
+.admin-modal-close:hover {
+    color: #2d2d2d;
+}
+
+/* ============================================
+   ADMIN RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 992px) {
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .staff-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .location-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .admin-table {
+        font-size: 0.9rem;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .location-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-stats {
+        flex-wrap: wrap;
+    }
+
+    .staff-card-actions {
+        flex-direction: column;
+    }
+
+    .table-actions {
+        flex-direction: column;
+    }
+
+    .table-action-btn {
+        width: 100%;
+    }
+
+    .admin-modal-content {
+        margin: 2rem 1rem;
+        max-width: 90%;
+    }
+
+    .dashboard-container {
+        padding: 1rem;
+    }
+
+    .dashboard-section {
+        padding: 1rem;
+    }
+
+    .admin-table {
+        font-size: 0.85rem;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+    }
+
+    .staff-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .location-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .staff-name {
+        font-size: 1rem;
+    }
+
+    .staff-stats {
+        padding: 0.75rem;
+        gap: 1rem;
+    }
+
+    .dashboard-container {
+        padding: 0.5rem;
+    }
+
+    .dashboard-section {
+        padding: 0.75rem;
+    }
+
+    .dashboard-title {
+        font-size: 1.25rem;
+        gap: 0.5rem;
+    }
+
+    .btn-admin-primary {
+        width: 100%;
+    }
+
+    .admin-modal-content {
+        padding: 1rem;
+    }
+
+    .admin-modal-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+    .navbar-admin,
+    .table-actions,
+    .btn-admin-primary,
+    .btn-admin-outline,
+    .staff-card-actions,
+    .admin-modal {
+        display: none !important;
+    }
+
+    .staff-card,
+    .location-card {
+        box-shadow: none;
+        border: 1px solid #e0e0e0;
+    }
+
+    .admin-table {
+        box-shadow: none;
+        border: 1px solid #e0e0e0;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

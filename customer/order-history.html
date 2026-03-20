@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - Smart Digital Canteen</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/customer.css">
+    <style>
+        body {
+            position: relative;
+            min-height: 100vh;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url('../assets/order-history-bg.jpeg') center/cover no-repeat;
+            filter: blur(8px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        Order History Page
+        Shows all past and current orders for the customer
+    -->
+    
+    <!-- Navigation Bar - With Black Background & White Text -->
+    <nav class="navbar navbar-customer" style="background-color: #000000;">
+        <div class="container flex-between">
+            <a href="landing.html" class="navbar-brand">
+                <img src="../assets/customer_landing/logo1.jpeg" alt="SUSL Forklet Logo">
+            </a>
+            
+            <button class="navbar-toggle" aria-label="Toggle navigation" style="color: #ffffff;">☰</button>
+            
+            <ul class="navbar-nav">
+                <li><a href="landing.html" class="nav-link" style="color: #ffffff;">Home</a></li>
+                <li><a href="menu.html" class="nav-link" style="color: #ffffff;">Menu</a></li>
+                <li><a href="cart.html" class="nav-link cart-badge" style="color: #ffffff;">
+                    🛒 Cart <span class="cart-count">0</span>
+                </a></li>
+                <li><a href="order-history.html" class="nav-link active" style="color: #ffffff;">My Orders</a></li>
+                <li id="userNav">
+                    <a href="login.html" class="nav-link" style="color: #ffffff;">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="page-header" style="background: linear-gradient(135deg, #cd5f08 0%, #a34d06 100%);">
+        <div class="container">
+            <h1 class="page-header-title">Order History</h1>
+            <p class="page-header-subtitle">View all your past orders</p>
+        </div>
+    </section>
+    
+    <!-- Order History Section -->
+    <section class="page-section">
+        <div class="container" style="max-width: 800px;">
+            <div id="orderHistoryContainer">
+                <!-- Order history will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/orders.js"></script>
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update navigation
+            updateNavigation();
+            
+            // Load order history
+            renderOrderHistory('orderHistoryContainer');
+            
+            // Update cart badge
+            updateCartBadge();
+        });
+        
+        /**
+         * Update navigation based on user login status
+         */
+        function updateNavigation() {
+            const currentUser = getCurrentUser();
+            const userNav = document.getElementById('userNav');
+            
+            if (currentUser && currentUser.role === USER_ROLES.CUSTOMER) {
+                userNav.innerHTML = `
+                    <div class="flex gap-sm" style="align-items: center;">
+                        <span class="nav-link">👤 <span class="user-name">${currentUser.name}</span></span>
+                        <a href="#" class="nav-link logout-btn" style="color: var(--danger);">Logout</a>
+                    </div>
+                `;
+                setupLogoutButton();
+            }
+        }
+    </script>
+</body>
+</html>
